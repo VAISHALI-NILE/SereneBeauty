@@ -90,6 +90,10 @@ form button[type="submit"] {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+.head{
+  width: 100%;
+  text-align: center;
+}
 .form-submit {
   width: 100%;
   text-align: center;
