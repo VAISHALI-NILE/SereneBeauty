@@ -4,4 +4,5 @@ function showMenu(){
 }
 function hideMenu(){
     navlinks.style.right = "-200px";
+
 }
