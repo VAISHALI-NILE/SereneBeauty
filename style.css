@@ -304,7 +304,7 @@ a {
   height: 50%;
   background-color: #dbc3a4;
 }
-footer{
+/* footer{
   background-color: rgb(0, 0, 0);
   height: 40%;
   width: 100%;
@@ -318,4 +318,39 @@ footer{
   display: inline;
   float: none;
   margin: -0.5%;
+} */
+/* Footer */
+/* Footer */
+/* Footer */
+/* Footer */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+footer {
+  background-color: #333;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+/* Social Icons */
+.social-icons a {
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: #f8f8f8;
+}
+
+/* Copy Right */
+.copy-right p {
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  text-align: right;
+}
+
+
+

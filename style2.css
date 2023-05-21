@@ -1,0 +1,435 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+/* ==================================home page===================================== */
+.header-home{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/b-img.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+nav{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+}
+nav img{
+    width: 150px;
+}
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 8px 12px;
+    position: relative;
+}
+.nav-links ul li a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+}
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #b4b0a6 ;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+.text-box{
+    width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+.text-box h1{
+    font-size: 62px;
+    color: #fff;
+}
+.text-box p{
+    margin: 10px 0 40px;
+    font-size: 14px;
+    color: #fff;
+}
+.hero-btn{
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 12px 34px;
+    font-size: 13px;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+}
+.hero-btn:hover{
+    border: 1px solid #b4b0a6;
+    background: #b4b0a6;
+    transition: 1s;
+}
+nav .fa{
+    display: none;
+}
+@media(max-width: 700px){
+    .text-box h1{
+        font-size: 20px;
+    }
+    .nav-links ul li{
+        display: block;
+    }
+    .nav-links{
+        position: absolute;
+       
+        height: 100vh;
+        width: 200px;
+        background-color: rgba(180, 176, 166, 0.8);
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+    }
+    nav .fa{
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .nav-links ul{
+        padding: 30px ;
+    }
+}
+/*------------------------intro---------------------------*/
+.intro{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+    align-items: center;
+}
+.intro hr{
+    width: 20%;
+    border-top: 1.5px solid;
+    position: absolute;
+    left: 40%;
+}
+/*-------------------services----------------------*/
+.services{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+}
+.services-col{
+    flex-basis: 31%;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    text-align: left;
+}
+.services-col img{
+    width: 100%;
+    border-radius: 10px;
+}
+.services-col p{
+    padding: 0;
+}
+.services-col h3{
+    margin-top: 16px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+.services-col .hero-btn{
+    margin-top: 5%;
+    color: #777;
+    border: 1px solid #777;
+    padding: 10px 30px;
+}
+/*------------Blogs---------------*/
+.blogs{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px ;
+}
+h1{
+    font-size: 36px;
+    font-weight: 600;
+}
+p{
+    color: #777;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 22px;
+    padding: 10px;
+}
+.row{
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+.blogs-col{
+    flex-basis: 31%;
+    background: #c9beb1;
+    border-radius: 10px ;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+}
+.blogs-col a{
+    text-decoration: none;
+    color: #777;
+}
+h3{
+    text-align: center;
+    font-weight: 600;
+    margin: 10px 0;
+}
+.blogs-col:hover{
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 2);
+}
+@media(max-width: 700px){
+    .row{
+        flex-direction: column;
+    }
+    
+}
+/*------------------------none---------------------------*/
+/* .blogs{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 50px;
+}
+.blogs-col{
+    flex-basis: 32%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+.blogs-col img{
+    width: 100%;
+    display: block;
+}
+.layer{
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.5s;
+}
+.layer:hover{
+    background: rgba(226, 0, 0, 0.7);
+}
+.layer h3{
+    width: 100%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 26px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    opacity: 0;
+    transition: 0.5s;
+}
+.layer:hover h3{
+    bottom: 49%;
+    opacity: 1;
+} */
+
+/*-------------------------------contact us---------------------*/
+.contact{
+    margin: 100px auto;
+    width: 80%;
+    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(images/login-img.jpg);
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 0;
+}
+.contact h1{
+    color: #fff;
+    margin-bottom: 40px;
+    padding: 0;
+}
+@media(max-width: 700px){
+    .contact h1{
+        font-size: 24px;
+    }
+}
+/*----------------footer------------------*/
+.footer{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer h4{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;
+}
+/* .icons .fa{
+    color: #f44336;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+} */
+.icons i {
+    color: #b4b0a6;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+  }
+
+/* =========================================services page=================================== */
+
+.header-services{
+    min-height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/service-bg-img.jpg);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+
+:root{
+    --white-light:rgba 255,255,255,0.5;
+    --alice-blue: #f8f9fa;
+    --carribean-green: #40c9a2;
+    --gray: #ededed;
+}
+.ser-section{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.ser-section img{
+    width: 100%;
+    display: block;
+}
+.container{
+    width:88vw;
+    margin :0 auto;
+}
+.lg-title,.md-title,.sm-title{
+    padding: 0.6rem 0;
+    text-transform: capitalize;
+}
+.lg-title{
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 1.3rem 0;
+    opacity: 0.9;
+}
+
+.md-title{
+    font-size: 2rem;
+
+}
+.sm-title{
+    font-weight: 300;
+    padding-left: 1px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+.text-light{
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    opacity: 0.5;
+    margin: 0.4rem 0;
+}
+.serv{
+    background: var(--alice-blue);
+    padding: 3.2rem 0;
+
+}
+.serv .text-light{
+    text-align: center;
+    width: 70%;
+    margin: 0.9rem auto;
+}
+.ser{
+    margin: 2rem;
+    position: relative;
+    background: white;
+
+}
+.ser-content{
+    background: var(--gray);
+    padding: 3rem 0.5rem 2rem 0.5rem;
+    cursor: pointer;
+}
+.ser-img{
+    background:var(--white-light);
+    box-shadow: 0 0 20px 10px var(--white-light);
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+    transition: background 0.5s ease;
+}
+.serv .hero-btn{
+    display: flex;
+    justify-content: center;
+    margin-top: 1.4rem;
+}
+.ser-info{
+    background: white;
+    padding-left: 1rem;
+}
+.ser-info-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ser-name{
+    color: black;
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 1rem;
+}
+.ser-price{
+    padding-top: 0.6rem;
+    padding-right: 0.6rem;
+    display: inline-block;
+}
+.ser-price:first-of-type{
+    text-decoration: line-through;
+    color: var(--carribean-green);
+}
+.ser-img img{
+    transition: transform 0.6s ease;
+}
+.ser:hover .ser-img img{
+    transform: scale(1,1);
+}
+.ser:hover .ser-img{
+    background: var(--carribean-green);
+}
+
