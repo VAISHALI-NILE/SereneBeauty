@@ -14,15 +14,15 @@ body {
   min-height: 100vh;
   margin: 4%;
   padding-bottom: -5%;
-  
 }
+
 .form-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   height: 80vh;
-
+  margin-left: 10%;
 }
 
 form {
@@ -58,21 +58,21 @@ label {
 }
 
 .form-input {
-	border: none;
-	border-bottom: 2px solid #ddd;
-	box-sizing: border-box;
-	display: block;
-	margin-bottom: 20px;
-	padding: 10px;
-	width: 100%;
-	font-size: 16px;
-	font-weight: 500;
-	color: #333;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
 }
 
 .form-input:focus {
-	outline: none;
-	border-color: #c8baa8;
+  outline: none;
+  border-color: #c8baa8;
 }
 
 .form-input::placeholder {
@@ -90,10 +90,12 @@ form button[type="submit"] {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-.head{
+
+.head {
   width: 100%;
   text-align: center;
 }
+
 .form-submit {
   width: 100%;
   text-align: center;
@@ -107,5 +109,25 @@ form button[type="submit"]:hover {
   .form-column {
     margin-right: 0;
     margin-bottom: 30px;
+    width: 100%;
+  }
+
+  .container {
+    margin: 2%;
+  }
+
+  form {
+    max-width: 90%;
+    opacity: 1;
+  }
+
+  .form-container {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  form {
+    padding: 10px;
   }
 }

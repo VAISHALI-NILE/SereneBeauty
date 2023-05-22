@@ -1,43 +1,52 @@
+
 body {
 	background-image: url('images/login-img.jpg');
+	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
 	background-color: #fafafa;
 	font-family: Bradley Hand, cursive;
 	margin: 0;
 	padding: 0;
-}
-/* 
-h1 {
-	text-align: center;
-	margin-top: 80px;
-	font-weight: 700;
-	color: #333;
-	letter-spacing: 1px;
-	text-transform: uppercase;
-	font-size: 36px;
-} */
-
-form {
+  }
+  
+  .container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+  }
+  
+  .form-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+  }
+  
+  form {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 	margin: 0 auto;
 	padding: 40px 60px;
-	width: 400px;
+	max-width: 400px;
 	opacity: 0.8;
-}
-
-label {
+  }
+  
+  
+  label {
 	display: block;
 	font-size: 16px;
 	font-weight: 500;
 	margin-bottom: 5px;
 	color: #333;
-}
-
-input[type="text"], input[type="password"] {
+  }
+  
+  input[type="text"],
+  input[type="password"] {
 	border: none;
 	border-bottom: 2px solid #ddd;
 	box-sizing: border-box;
@@ -48,14 +57,15 @@ input[type="text"], input[type="password"] {
 	font-size: 16px;
 	font-weight: 500;
 	color: #333;
-}
-
-input[type="text"]:focus, input[type="password"]:focus {
+  }
+  
+  input[type="text"]:focus,
+  input[type="password"]:focus {
 	outline: none;
 	border-color: #c8baa8;
-}
-
-input[type="submit"] {
+  }
+  
+  input[type="submit"] {
 	background-color: black;
 	border: none;
 	border-radius: 50px;
@@ -67,21 +77,37 @@ input[type="submit"] {
 	width: 100%;
 	opacity: 1;
 	transition: background-color 0.3s ease;
-}
-
-input[type="submit"]:hover {
+  }
+  
+  input[type="submit"]:hover {
 	background-color: rgba(0, 0, 0, 0.651);
-}
-
-.fa-user-circle {
+  }
+  
+  .fa-user-circle {
 	color: #c8baa8;
 	font-size: 80px;
 	margin-bottom: 20px;
-}
-
-.error {
+  }
+  
+  .error {
 	color: red;
 	font-size: 14px;
 	margin-top: 10px;
 	text-align: center;
-}
+  }
+  
+  @media only screen and (max-width: 600px) {
+	.container {
+	  margin: 2%;
+	}
+  
+	form {
+	  width: 90%;
+	  opacity: 1;
+	  padding: 20px;
+	}
+  }
+  a{
+	color: black;
+	padding: 17%;
+  }
