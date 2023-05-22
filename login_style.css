@@ -1,13 +1,10 @@
-
 body {
+	margin: 0;
+	padding: 0;
 	background-image: url('images/login-img.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: center;
-	background-color: #fafafa;
-	font-family: Bradley Hand, cursive;
-	margin: 0;
-	padding: 0;
+	font-family: 'Poppins', sans-serif;
   }
   
   .container {

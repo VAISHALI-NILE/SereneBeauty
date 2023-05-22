@@ -4,7 +4,7 @@ body {
   background-image: url('images/login-img.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  font-family: Bradley Hand, cursive;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container {

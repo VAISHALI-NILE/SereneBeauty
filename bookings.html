@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>serene Beauty | Bookings</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url(images/login-img.jpg);
+      padding: 20px;
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    
+    .booking-form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: whitesmoke;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      opacity: 0.6;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border-top: 1px;
+      border-left: 1px;
+      border-right: 1px;
+      box-sizing: border-box;
+      background-color: whitesmoke;
+    }
+    
+    input[type="submit"] {
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 42%;
+    }
+    
+    input[type="submit"]:hover {
+      background-color: #555;
+    }
+
+    .time-slots {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .time-slot {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      padding: 10px;
+      transition: all 0.3s ease;
+      margin: 4px;
+    }
+
+    .time-slot:hover {
+      background-color: #b05f17;
+      border-color: #9a560c;
+    }
+
+    .time-slot.selected {
+      background-color: #333;
+      color: #fff;
+      border-color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Booking Page</h1>
+  
+  <div class="booking-form">
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="time">Time:</label>
+        <div class="time-slots">
+          <div class="time-slot">09:00 AM</div>
+          <div class="time-slot">10:00 AM</div>
+          <div class="time-slot">11:00 AM</div>
+          <div class="time-slot">12:00 PM</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <input type="submit" value="Submit">
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
