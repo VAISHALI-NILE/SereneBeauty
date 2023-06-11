@@ -3,7 +3,7 @@
     <head>
         <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
         <title>Serene Beauty | About Us</title>
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="css/style2.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
@@ -28,15 +28,24 @@
 <body class="aboutus">
 	<section class="header-aboutus">
 		<nav>
-			<a href="index2.html"><img src="images/logo-black.png" alt=""></a>
+			<a href="index2.php"><img src="images/logo-black.png" alt=""></a>
 			<div class="nav-links" id="navlinks">
 				<i class="fa fa-times" onclick="hideMenu()"></i>
 				<ul>
-					<li><a href="index2.html">HOME</a></li>
-					<li><a href="services.html">SERVICES</a></li>
-					<li><a href="blog.html">BLOGS</a></li>
-					<li><a href="signUp.html">SIGN UP</a></li>
-					<li><a href="login.html">LOG IN</a></li>
+					<li><a href="index2.php">HOME</a></li>
+					<li><a href="services.php">SERVICES</a></li>
+					<li><a href="blog.php">BLOGS</a></li>
+					<?php 
+					session_start();
+					if($_SESSION['flag'] === 0)
+					{   
+						echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+						echo "<li><a href='login.html'>LOG IN</a></li>";
+					}
+					else{
+						echo "<li><a href='user_pannel.php'>USER</a></li>";
+					}
+					?>
 					
 				</ul>
 			</div>

@@ -73,15 +73,24 @@
     <body>
         <section class="header-services">
             <nav>
-                <a href="index2.html"><img src="images/logo-black.png" alt=""></a>
+                <a href="index2.php"><img src="images/logo-black.png" alt=""></a>
                 <div class="nav-links" id="navlinks">
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
-                        <li><a href="index2.html">HOME</a></li>
-                        <li><a href="services.html">SERVICES</a></li>
-                        <li><a href="blog.html">BLOGS</a></li>
-                        <li><a href="signUp.html">SIGN UP</a></li>
-                        <li><a href="login.html">LOG IN</a></li>
+                        <li><a href="index2.php">HOME</a></li>
+                        <li><a href="services.php">SERVICES</a></li>
+                        <li><a href="blog.php">BLOGS</a></li>
+                        <?php 
+                        session_start();
+                        if($_SESSION['flag'] === 0)
+                        {   
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        }
+                        else{
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                        }
+                        ?>
                         
                     </ul>
                 </div>
@@ -138,33 +147,29 @@
             <div class="container">
                 <h1 class="lg-title">Hair Services That we provide</h1>
                 <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
-                <div class="card">
-                    <img src="images/hair-services.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">Haircut</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/makeup-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">MakeUp</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/skincare-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">FacePacks</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
+                <?php
+            
+                $conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+                $sql = "SELECT name, description, cost FROM service WHERE type = 'hair'";
+                $result = $conn->query($sql);
+                
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()){
+                        $name = $row['name'];
+                        $cost = $row['cost'];
+                        $dis = $row['description'];
+                        echo '<div class="card">
+                            <img src="images/hair-services.jpg" alt="Product 1">
+                            <div class="card-content">
+                                <h2 class="card-title">',$name,'</h2>
+                                <p class="card-description">',$dis,'</p>
+                                <p class="card-price">Rs ',$cost,'</p>
+                                <a class="hero-btn" href="bookings.html">Book Now</a>
+                            </div>
+                        </div>';
+               }
+            }
+            ?>
     <!-- Add more product cards here -->
 </div>
 </div>
@@ -176,33 +181,29 @@
             <div class="container">
                 <h1 class="lg-title">Skincare Services That we provide</h1>
                 <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
-                <div class="card">
-                    <img src="images/hair-services.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">Haircut</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/makeup-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">MakeUp</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/skincare-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">FacePacks</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
+                <?php
+            
+            $conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+            $sql = "SELECT name, description, cost FROM service WHERE type ='skin'";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()){
+                    $name = $row['name'];
+                    $cost = $row['cost'];
+                    $dis = $row['description'];
+                    echo '<div class="card">
+                        <img src="images/hair-services.jpg" alt="Product 1">
+                        <div class="card-content">
+                            <h2 class="card-title">',$name,'</h2>
+                            <p class="card-description">',$dis,'</p>
+                            <p class="card-price">Rs ',$cost,'</p>
+                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                        </div>
+                    </div>';
+           }
+        }
+        ?>
     <!-- Add more product cards here -->
 </div>
 </div>
@@ -214,33 +215,29 @@
             <div class="container">
                 <h1 class="lg-title">Makeup Services That we provide</h1>
                 <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
-                <div class="card">
-                    <img src="images/hair-services.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">Haircut</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/makeup-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">MakeUp</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="images/skincare-service.jpg" alt="Product 1">
-                    <div class="card-content">
-                        <h2 class="card-title">FacePacks</h2>
-                        <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vehicula risus libero.</p>
-                        <p class="card-price">Rs 190</p>
-                        <a class="hero-btn" href="bookings.html">Book Now</a>
-                    </div>
-                </div>
+                <?php
+            
+            $conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+            $sql = "SELECT name, description, cost FROM service WHERE type='makeup'";
+            $result = $conn->query($sql);
+            
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()){
+                    $name = $row['name'];
+                    $cost = $row['cost'];
+                    $dis = $row['description'];
+                    echo '<div class="card">
+                        <img src="images/hair-services.jpg" alt="Product 1">
+                        <div class="card-content">
+                            <h2 class="card-title">',$name,'</h2>
+                            <p class="card-description">',$dis,'</p>
+                            <p class="card-price">Rs ',$cost,'</p>
+                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                        </div>
+                    </div>';
+           }
+        }
+        ?>
     <!-- Add more product cards here -->
 </div>
 </div>
@@ -248,7 +245,7 @@
 </section>
 <section class="footer">
     <hr style="margin-left: 10%; margin-right: 10%;">
-    <a href="aboutus.html"><h4>About Us</h4></a>
+    <a href="aboutus.php"><h4>About Us</h4></a>
     <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis egestas.
         Vestibulum tortor qua</p>
     <div class="icons">

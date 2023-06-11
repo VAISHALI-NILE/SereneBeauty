@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewpoint" content="with=device-width, initial-scale=1.0">
 	<title>Serene Beauty | Contact Us</title>
-	<link rel="stylesheet" type="text/css" href="contact_style.css">
+	<link rel="stylesheet" type="text/css" href="css/contact_style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
@@ -152,15 +152,24 @@ nav .fa{
 <body>
 <section class="header-home">
 	<nav>
-		<a href="index2.html"><img src="images/logo-white.png" alt=""></a>
+		<a href="index2.php"><img src="images/logo-white.png" alt=""></a>
 		<div class="nav-links" id="navlinks">
 			<i class="fa fa-times" onclick="hideMenu()"></i>
 			<ul>
-				<li><a href="index2.html">HOME</a></li>
-				<li><a href="services.html">SERVICES</a></li>
-				<li><a href="blog.html">BLOGS</a></li>
-				<li><a href="signUp.html">SIGN UP</a></li>
-				<li><a href="login.html">LOG IN</a></li>
+                <li><a href="index2.php">HOME</a></li>
+                <li><a href="services.php">SERVICES</a></li>
+                <li><a href="blog.php">BLOGS</a></li>
+                <?php 
+                session_start();
+                if($_SESSION['flag'] === 0)
+                {   
+                    echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                    echo "<li><a href='login.html'>LOG IN</a></li>";
+                }
+                else{
+                    echo "<li><a href='user_pannel.php'>USER</a></li>";
+                }
+                ?>
 				
 			</ul>
 		</div>
@@ -232,7 +241,7 @@ nav .fa{
      </section>
 	 <section class="footer">
         <hr style="margin-left: 10%; margin-right: 10%;">
-		<a href="aboutus.html"><h4>About Us</h4></a>
+		<a href="aboutus.php"><h4>About Us</h4></a>
 		<p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis egestas.
 			Vestibulum tortor qua</p>
 		<div class="icons">

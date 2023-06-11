@@ -3,26 +3,44 @@
     <head>
         <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
         <title>Serene Beauty | Home </title>
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="css\style2.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
         <script src="logic.js"></script>
+        <style>
+        .header-home{
+            min-height: 100vh;
+            width: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/b-img.jpg);
+            background-position: center;
+            background-size: cover;
+            position: relative;
+        }
+    </style>
     </head>
     <body>
         <section class="header-home">
             <nav>
-                <a href="index2.html"><img src="images/logo-black.png" alt=""></a>
+                <a href="index2.php"><img src="images/logo-black.png" alt=""></a>
                 <div class="nav-links" id="navlinks">
                     <i class="fa fa-times" onclick="hideMenu()"></i>
                     <ul>
-                        <li><a href="index2.html">HOME</a></li>
-                        <li><a href="services.html">SERVICES</a></li>
-                        <li><a href="blog.html">BLOGS</a></li>
-                        <li><a href="signUp.html">SIGN UP</a></li>
-                        <li><a href="login.html">LOG IN</a></li>
-                        
+                        <li><a href="index2.php">HOME</a></li>
+                        <li><a href="services.php">SERVICES</a></li>
+                        <li><a href="blog.php">BLOGS</a></li>
+                        <?php 
+                        session_start();
+                        if($_SESSION['flag'] === 0)
+                        {   
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        }
+                        else{
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                        }
+                        ?>
                     </ul>
                 </div>
                 <i class="fa fa-bars" onclick="showMenu()"></i>
@@ -53,21 +71,21 @@
                 <h3>HairServices</h3>
                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                     Vestibulum tortor qua</p>
-                <a href="services.html" class="hero-btn">Know More</a>
+                <a href="services.php" class="hero-btn">Know More</a>
             </div>
             <div class="services-col">
                 <img src="images/skincare-service.jpg" alt="">
                 <h3>SkinServices</h3>
                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                     Vestibulum tortor qua</p>
-                <a href="services.html" class="hero-btn">Know More</a>
+                <a href="services.php" class="hero-btn">Know More</a>
             </div>
             <div class="services-col">
                 <img src="images/makeup-service.jpg" alt="">
                 <h3>MakeupServices</h3>
                 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                     Vestibulum tortor qua</p>
-                <a href="services.html" class="hero-btn">Know More</a>
+                <a href="services.php" class="hero-btn">Know More</a>
             </div>
         </div>
 </section>
@@ -80,19 +98,19 @@
             <h3>Haircare</h3>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                 Vestibulum tortor quam,  </p>
-                <a href="blog.html"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
+                <a href="blog.php"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
         </div>
         <div class="blogs-col">
             <h3>Skincare</h3>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                 Vestibulum tortor quam, </p>
-                <a href="blog.html"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
+                <a href="blog.php"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
         </div>
         <div class="blogs-col">
             <h3>Hygine</h3>
             <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
                 Vestibulum tortor quam,</p>
-                <a href="blog.html"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
+                <a href="blog.php"><h6>Read more  <i class="fa fa-arrow-right"></i></h6></a>
         </div>
     </div>
 </section>
@@ -128,13 +146,13 @@
 <!-------------contact us--------->
 <section class="contact">
     <h1>Directly get in touch with us</h1>
-    <a href="contactus.html" class="hero-btn">CONTACT US</a>
+    <a href="contactus.php" class="hero-btn">CONTACT US</a>
 </section>
 
 <hr style="margin-left: 10%; margin-right: 10%;">
 <!------------------Footer------------>
 <section class="footer">
-    <a href="aboutus.html"><h4>About Us</h4></a>
+    <a href="aboutus.php"><h4>About Us</h4></a>
     <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis egestas.
         Vestibulum tortor qua</p>
     <div class="icons">

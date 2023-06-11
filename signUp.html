@@ -2,11 +2,11 @@
 <html>
 <head>
   <title>Beauty Salon | Registration Form</title>
-  <link rel="stylesheet" href="signup_style.css">
+  <link rel="stylesheet" href="css/signup_style.css">
 </head>
 <body>
   <div class="container">
-    <form action="#" method="POST">
+    <form action="signup.php" method="POST">
     <div class="head">
       <h2>Signup</h2>
     </div>
@@ -37,14 +37,16 @@
         <label for="area">Area in City:</label>
         <input class="form-input" type="text"  name="area" required>
   
-        <label for="services">Services Interested In:</label>
-        <select class="form-input" name="services" required>
+        <label for="password">create password</label>
+        <input class="form-input" type="text" name="password" required>
+
+<!--         <select class="form-input" name="services" required>
           <option  value="">Select services</option>
           <option value="haircut">Haircut</option>
           <option value="manicure">Manicure</option>
           <option value="pedicure">Pedicure</option>
           <option value="facial">Facial</option>
-        </select>
+        </select> -->
       </div>
       <div class="form-submit">
         <button type="submit">Submit</button>
