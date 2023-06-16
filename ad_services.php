@@ -49,7 +49,7 @@
     </form>
 <!-- ==========================adding services=================================== -->
 <?php 
-$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+$conn = $_SESSION['conn'];
 if(isset($_POST['submit'])){
 
 
@@ -82,7 +82,7 @@ if ($conn->query($sql) === TRUE)
             </tr>
         </thead>
         <tbody>
-            <!-- Rows will be dynamically added/updated via JavaScript -->
+            <!-- Rows will be dynamically added/updated via db -->
         </tbody>
     </table>
 </div>

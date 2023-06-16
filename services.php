@@ -3,7 +3,7 @@
     <head>
         <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
         <title>Serene beauty | Services</title>
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="css/style2.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">

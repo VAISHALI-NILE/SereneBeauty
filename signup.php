@@ -1,7 +1,7 @@
 <?php 
 session_start();
-$conn = $_SESSION['conn'];
-$_SESSION['flag'] = 1;
+$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+
 
 $f_name = $_POST["first-name"];
 $l_name = $_POST["last-name"];
@@ -19,6 +19,12 @@ VALUES('$f_name' ,' $l_name' ,'$email' , $mob_no , $age , '$city' , '$area',
 
 if ($conn->query($sql) === TRUE) 
 {
+  $sql = "SELECT id  FROM customer WHERE email = '$email' AND password = '$password' ";
+  $data = $conn->query($sql) ;
+  $row = $data->fetch_assoc();
+  $_SESSION['flag'] = 1;
+	$id = $row["id"];
+	$_SESSION['id'] = $id;
 	header("Location: index2.php");
   echo "<br>New record created successfully";
 } 

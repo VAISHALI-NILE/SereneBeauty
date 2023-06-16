@@ -356,9 +356,17 @@ nav .fa{
 	</section>
 <!-- =============================logout=================================== -->
 	<section id="logout">
-		<?php 
+	<form action="">
+	<input type="submit" class="btn" value="LOG OUT">
+	</form>
+	<?php
+	if(isset($_POST['submit']))
+	{ 
 			$_SESSION['flag'] = 0;
-		?>
+			header("Location: index2.php");
+		
+	}
+	?>
 		<h3>Logged Out</h3>
 	</section>
   </div>
