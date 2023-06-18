@@ -1,62 +1,82 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>serene Beauty | Bookings</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-image: url(images/login-img.jpg);
+      /* background-image: url(images/login-img.jpg); */
       padding: 20px;
     }
-    
+
+    body {
+      min-height: 30vh;
+      width: 100%;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/readblog-img.jpg);
+      background-position: center;
+      background-size: cover;
+      position: relative;
+    }
+
     h1 {
       color: #333;
       text-align: center;
     }
-    
+
     .booking-form {
       max-width: 500px;
       margin: 0 auto;
-      background-color: whitesmoke;
+      background-color: white;
       padding: 20px;
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      opacity: 0.6;
+      opacity: 0.9;
     }
-    
+
     .form-group {
       margin-bottom: 20px;
     }
-    
+
     label {
       display: block;
-      font-weight: bold;
+      font-size: 16px;
+      font-weight: 500;
       margin-bottom: 5px;
+      color: #333;
     }
-    
+
     input[type="text"],
     input[type="email"],
     input[type="date"],
     select {
-      width: 100%;
-      padding: 10px;
-      border-top: 1px;
-      border-left: 1px;
-      border-right: 1px;
-      box-sizing: border-box;
-      background-color: whitesmoke;
-    }
-    
-    input[type="submit"] {
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
       border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin-left: 42%;
+      border-bottom: 2px solid black;
+      box-sizing: border-box;
+      display: block;
+      margin-bottom: 20px;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      font-weight: 500;
+      background-color: white;
+      color: #333;
     }
-    
+
+    input[type="submit"] {
+      background-color: black;
+      border: none;
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 10px;
+      width: 100%;
+      opacity: 1;
+      transition: background-color 0.3s ease;
+    }
+
     input[type="submit"]:hover {
       background-color: #555;
     }
@@ -80,8 +100,8 @@
     }
 
     .time-slot:hover {
-      background-color: #b05f17;
-      border-color: #9a560c;
+      background-color: #ecd0cc;
+      border-color: #ecd0cc;
     }
 
     .time-slot.selected {
@@ -89,23 +109,27 @@
       color: #fff;
       border-color: #333;
     }
+    h1{
+      color: white;
+    }
   </style>
 </head>
+
 <body>
   <h1>Booking Page</h1>
-  
+
   <div class="booking-form">
     <form id="bookingForm">
       <div class="form-group">
         <label for="email">Name:</label>
         <input type="email" id="email" name="email" required>
       </div>
-      
+
       <div class="form-group">
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required>
       </div>
-      
+
       <div class="form-group">
         <label for="time">Time:</label>
         <div class="time-slots">
@@ -115,7 +139,7 @@
           <div class="time-slot">12:00 PM</div>
         </div>
       </div>
-      
+
       <div class="form-group">
         <input type="submit" value="Submit">
       </div>
@@ -123,4 +147,5 @@
   </div>
 
 </body>
+
 </html>

@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('images/login-img.jpg');
+  background-image: url('/images/login-img.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   font-family: 'Poppins', sans-serif;
@@ -21,8 +21,8 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  height: 80vh;
-  margin-left: 10%;
+  height: 68vh;
+  margin-left: 5%;
 }
 
 form {
@@ -80,7 +80,7 @@ label {
 }
 
 form button[type="submit"] {
-  padding: 10px 20px;
+  padding: 10px 130px;
   font-size: 16px;
   border-radius: 50px;
   border: none;

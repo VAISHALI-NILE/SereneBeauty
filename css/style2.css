@@ -315,7 +315,7 @@ h3{
 .header-services {
     min-height: 60vh;
     width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/service-bg-img.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/images/service-bg-img.jpg);
     background-position: center;
     background-size: cover;
     position: relative;

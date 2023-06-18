@@ -17,12 +17,12 @@
 <body>
 <style>
 .header-home{
-    /* min-height: 80vh;
+    min-height: 100vh;
     width: 100%;
-    /* background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/blog-img.jpg); 
+    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/user-img-bg.jpg); 
     background-position: center;
     background-size: cover;
-    position: relative; */
+    position: relative; 
 }
 nav{
     display: flex;
@@ -44,7 +44,7 @@ nav img{
     position: relative;
 }
 .nav-links ul li a{
-    color: black;
+    color: white;
     text-decoration: none;
     font-size: 13px;
 }
@@ -183,7 +183,7 @@ nav .fa{
 <!-- ==========================header======================================== -->
 <section class="header-home">
 	<nav>
-		<a href="index2.php"><img src="images/logo-black.png" alt=""></a>
+		<a href="index2.php"><img src="images/logo-white.png" alt=""></a>
 		<div class="nav-links" id="navlinks">
 			<i class="fa fa-times" onclick="hideMenu()"></i>
 			<ul>
@@ -196,7 +196,7 @@ nav .fa{
 		</div>
 		<i class="fa fa-bars" onclick="showMenu()"></i>
 	</nav>
-</section>
+
 <!-- =================================side menu============================ -->
 <div class="container">
   <div class="menu">
@@ -255,7 +255,7 @@ nav .fa{
 	  </form>
 <!-- ===============================update user details====================================== -->
 	  <?php
-	  session_start();
+	  
 	  if($_SESSION['flag']===1)
 	  {
 		$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
@@ -355,20 +355,21 @@ nav .fa{
 	  </form>
 	</section>
 <!-- =============================logout=================================== -->
-	<section id="logout">
+	<!-- <section id="logout">
 	<form action="">
 	<input type="submit" class="btn" value="LOG OUT">
-	</form>
-	<?php
-	if(isset($_POST['submit']))
-	{ 
-			$_SESSION['flag'] = 0;
-			header("Location: index2.php");
+	</form> -->
+	<!-- //<?php
+	// if(isset($_POST['submit']))
+	// { 
+	// 		$_SESSION['flag'] = 0;
+	// 		header("Location: index2.php");
 		
-	}
-	?>
+	// }
+	// ?>
 		<h3>Logged Out</h3>
 	</section>
+	</section> -->
   </div>
 </div>
 </body>

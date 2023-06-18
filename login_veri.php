@@ -7,16 +7,16 @@ echo "Connected successfully";
 $username = $_POST["username"];
 $password = $_POST["password"];
 
-$sql = "SELECT id , email , password FROM customer WHERE email = '$username' AND password = '$password' ";
+$sql = "SELECT id  FROM customer WHERE email = '$username' AND password = '$password' ";
 $data = $conn->query($sql) ;
 if($data->num_rows > 0){
 	$row = $data->fetch_assoc();
 	$id = $row["id"];
 	$_SESSION['id'] = $id;
-	echo "<h1>",$id."</h1>";
+
 	$_SESSION['flag'] = 1;
 	$_SESSION['conn'] = $conn;
-	if($id === 3)
+	if($_SESSION['id'] === '3')
 	{
 		header("Location: ad_services.php");
 	}

@@ -10,7 +10,7 @@ body {
   }
   
   h1 {
-	color: #333;
+	color: white;
 	text-align: center;
 	margin: 30px 0;
   }
@@ -22,6 +22,7 @@ body {
 	padding: 20px;
 	background-color: #fff;
 	border-radius: 5px;
+	opacity: 0.9;
 	
   }
 #t{
@@ -31,7 +32,7 @@ body {
 	width: 80%;
   }
   .menu {
-	background-color: #a38a72;
+	background-color: #838285;
 	width: 200px;
 	border-radius: 5px;
 	color: #fff;
@@ -58,7 +59,7 @@ body {
   }
   
   .menu a:hover {
-	background-color: #836750;
+	background-color: #958c8f;
   }
   
   .content {
@@ -100,20 +101,20 @@ body {
 
   .btn {
 
-	background-color: #836750;
+	background-color: #838285;
 	color: white;
 	padding: 10px 20px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	border-radius: 4px;
-	border: #836750;
+	border: #838285;
 	transition: background-color 0.3s;
 	cursor: pointer;
   }
   
   .btn:hover {
-	background-color: #836750;
+	background-color: #958c8f;
   }
   
   .booking-list {
@@ -123,17 +124,17 @@ body {
   .booking-item {
 	margin-bottom: 10px;
 	padding: 10px;
-	background-color: #ccc5c0;
+	background-color: #89878a42;
 	border: 1px solid #ddd;
 	border-radius: 3px;
   }
   
   .booking-item .btn {
-	background-color: #836750;
+	background-color: #95867f;
   }
   
   .booking-item .btn:hover {
-	background-color: #836750;
+	background-color: #89878a42;
   }
   
   .cancel-btn {

@@ -1,11 +1,10 @@
-/* .header-home{
-    min-height: 100vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)),url(images/b-img.jpg);
-    background-position: center;
-    background-size: cover;
-    position: relative;
-} */
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
 nav{
     display: flex;
     padding: 2% 6%;
@@ -26,7 +25,7 @@ nav img{
     position: relative;
 }
 .nav-links ul li a{
-    color: #0c0b0b;
+    color: white;
     text-decoration: none;
     font-size: 13px;
 }
@@ -108,32 +107,75 @@ nav .fa{
         padding: 30px ;
     }
 }
-.admin-panel {
-    max-width: 800px;
-    margin: 0 auto;
+.admin-panel{
+    max-width: 107%;
+    margin: -7px;
+    padding-top: 1%;
+    max-height: 100%;
+    margin-bottom: 0%;
 }
 
 h2 {
     text-align: center;
+    color: white;
 }
 
+
+  
+
+  input[type="file"] {
+    border: none;
+	border-bottom: 2px solid #ddd;
+	box-sizing: border-box;
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+  }
+  
 form {
-    margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+	margin: 0 auto;
+	padding: 40px 60px;
+	max-width: 400px;
+	opacity: 0.9;
+  }
+h3{
+    
+    color: black;
 }
-
 form input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
+    border: none;
+	border-bottom: 2px solid #ddd;
+	box-sizing: border-box;
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
 }
-
+input[type="text"]:focus{
+  outline: none;
+  border-color: #c8baa8;
+}
 form button {
     padding: 10px 20px;
+    background-color: #7c6a67;
+    border: none;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 th, td {
@@ -143,7 +185,8 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #776461;
+    background-size: cover;
 }
 
 tr:hover {
@@ -154,3 +197,52 @@ tr:hover {
     display: flex;
     justify-content: space-around;
 }
+.delete-button {
+    background-color: #776461;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 10px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  

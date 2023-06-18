@@ -1,57 +1,73 @@
-nav{
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+nav {
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
 }
-nav img{
+
+nav img {
     width: 150px;
 }
-.nav-links{
+
+.nav-links {
     flex: 1;
     text-align: right;
 }
-.nav-links ul li{
+
+.nav-links ul li {
     list-style: none;
     display: inline-block;
     padding: 8px 12px;
     position: relative;
 }
-.nav-links ul li a{
-    color: #0c0b0b;
+
+.nav-links ul li a {
+    color: white;
     text-decoration: none;
     font-size: 13px;
 }
-.nav-links ul li::after{
+
+.nav-links ul li::after {
     content: '';
     width: 0%;
     height: 2px;
-    background: #b4b0a6 ;
+    background: #b4b0a6;
     display: block;
     margin: auto;
     transition: 0.5s;
 }
-.nav-links ul li:hover::after{
+
+.nav-links ul li:hover::after {
     width: 100%;
 }
-.text-box{
+
+.text-box {
     width: 90%;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     text-align: center;
 }
-.text-box h1{
+
+.text-box h1 {
     font-size: 62px;
     color: #fff;
 }
-.text-box p{
+
+.text-box p {
     margin: 10px 0 40px;
     font-size: 14px;
     color: #fff;
 }
-.hero-btn{
+
+.hero-btn {
     display: inline-block;
     text-decoration: none;
     color: #fff;
@@ -62,24 +78,29 @@ nav img{
     position: relative;
     cursor: pointer;
 }
-.hero-btn:hover{
+
+.hero-btn:hover {
     border: 1px solid #b4b0a6;
     background: #b4b0a6;
     transition: 1s;
 }
-nav .fa{
+
+nav .fa {
     display: none;
 }
-@media(max-width: 700px){
-    .text-box h1{
+
+@media(max-width: 700px) {
+    .text-box h1 {
         font-size: 20px;
     }
-    .nav-links ul li{
+
+    .nav-links ul li {
         display: block;
     }
-    .nav-links{
+
+    .nav-links {
         position: absolute;
-       
+
         height: 100vh;
         width: 200px;
         background-color: rgba(180, 176, 166, 0.8);
@@ -89,44 +110,86 @@ nav .fa{
         z-index: 2;
         transition: 1s;
     }
-    nav .fa{
+
+    nav .fa {
         display: block;
         color: #fff;
         margin: 10px;
         font-size: 22px;
         cursor: pointer;
     }
-    .nav-links ul{
-        padding: 30px ;
+
+    .nav-links ul {
+        padding: 30px;
     }
 }
+
 .admin-panel {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: 107%;
+    margin: -7px;
+    background-color: #F9E0BB;
+    padding-top: 1%;
+    max-height: 100%;
+    margin-bottom: 0%;
 }
 
 h2 {
     text-align: center;
+    color:white;
 }
-
+input[type="file"] {
+    border: none;
+	border-bottom: 2px solid #ddd;
+	box-sizing: border-box;
+	display: block;
+	margin-bottom: 20px;
+	padding: 10px;
+	width: 100%;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333;
+  }
 form {
-    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    padding: 40px 60px;
+    max-width: 400px;
+    opacity: 0.9;
 }
 
-form input[type="text"],
+form input[type="text"],input[type="file"],
 form textarea {
+    border: none;
+    border-bottom: 2px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
     width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+form input[type="text"],input[type="file"],
+form textarea:focus {
+    outline: none;
+    border-color: #c8baa8;
 }
 
 form button {
     padding: 10px 20px;
+    background-color: #7c6a67;
+    border: none;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 th,
@@ -137,7 +200,7 @@ td {
 }
 
 th {
-    background-color: #f2f2f2;
+    background-color: #776461;
 }
 
 tr:hover {
@@ -147,4 +210,32 @@ tr:hover {
 .actions {
     display: flex;
     justify-content: space-around;
+}
+
+.delete-button {
+    background-color: #776461;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pre-button {
+    background-color: #ce9b82;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
 }
