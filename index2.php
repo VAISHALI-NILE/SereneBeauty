@@ -34,7 +34,11 @@
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="blog.php">BLOGS</a></li>
                     <?php
-                    session_start();
+                    if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
                     if ($_SESSION['flag']) {
                         $f = $_SESSION['flag'];
                         if ($f === 0) {
@@ -58,7 +62,7 @@
             <h1>Beautify inside n out</h1>
             <p>Pellentesque hlbbmnvabitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit
                 amet quam egestas semper. Aenean ultricies mi vitae est.</p>
-            <a href="" class="hero-btn">get started</a>
+            <a href="services.php" class="hero-btn">get started</a>
 
         </div>
     </section>

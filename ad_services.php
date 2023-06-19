@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['submit'])) {
+    $service_name = $_POST['service_name'];
+    $service_description = $_POST['service_description'];
+    $service_cost = $_POST['service_cost'];
+    $service_type = $_POST['service_type'];
+
+    $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO service (name, description, cost, type) VALUES ('$service_name', '$service_description', '$service_cost', '$service_type')";
+    if ($conn->query($sql) === TRUE) {
+      header("Location: ad_services.php");
+      echo "Service added successfully.";
+    } else {
+      echo "Error adding service: " . $conn->error;
+    }
+
+    $conn->close();
+  }
+}
+?>
+
+
 <html>
 
 <head>
@@ -51,41 +77,20 @@
       <h2>SERVICES</h2>
       <br>
       <!-- Add Service Form -->
-      <form id="add-service-form" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+
+      <form id="add-service-form" action="" method="post">
         <h3>Add Service</h3>
         <input type="text" name="service_name" placeholder="Service Name" required>
         <input type="text" name="service_description" placeholder="Service Description" required>
         <input type="text" name="service_cost" placeholder="Service Cost" required>
         <input type="text" name="service_type" placeholder="Service Type" required>
         <input type="file" id="blog_image" name="blog_image" accept="image/*" required>
-        <button type="submit">Add Service</button>
+        <button type="submit" name="submit">Add Service</button>
       </form>
       <br><br><br>
   </section>
   <!-- ==========================adding services=================================== -->
-  <?php
-  $conn = $_SESSION['conn'];
-  if (isset($_POST['submit'])) {
 
-
-    $name = $_POST["service_name"];
-    $description = $_POST["service_description"];
-    $cost = $_POST["service_cost"];
-    $type = $_POST["service_type"];
-
-
-    $sql = "INSERT INTO service (name,description,cost,type) 
-VALUES('$name','$description',$cost,'$type')";
-
-
-    if ($conn->query($sql) === TRUE) {
-      echo "<h1>New record created successfully</h1>";
-    }
-
-  }
-
-
-  ?>
   <!-- </div> -->
   <!-- Service Table -->
 
@@ -101,22 +106,28 @@ VALUES('$name','$description',$cost,'$type')";
     </thead>
     <tbody>
       <!-- Rows will be dynamically added/updated via db -->
-      <tr>
-        <td class="ser-name">Wolfcut</td>
-        <td>dvcsvcsdhvcsdmcbsdncbnmc</td>
-        <td></td>
-        <td></td>
-        <td><button class="delete-button">Delete</button> </td>
-
-      </tr>
-      <tr>
-        <td class="ser-name">Wolfcut</td>
-        <td>dvcsvcsdhvcsdmcbsdncbnmc</td>
-        <td></td>
-        <td></td>
-        <td><button class="delete-button">Delete</button> </td>
-
-      </tr>
+      <?php
+      $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+      if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+      }
+      $sql2 = "SELECT * FROM service";
+      $result = $conn->query($sql2);
+      if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+          $name = $row['name'];
+          $cost = $row['cost'];
+          $dis = $row['description'];
+          $ty = $row['type'];
+          echo '<tr>
+      <td class="ser-name">', $name, '</td>
+      <td>', $dis, '</td>
+      <td>', $cost, '</td>
+      <td>', $ty, '</td>
+      <td><button class="delete-button">Delete</button> </td>
+      </tr>';
+        }
+      } ?>
     </tbody>
   </table>
 
@@ -131,42 +142,46 @@ VALUES('$name','$description',$cost,'$type')";
   </div>
 
   <script>
-    // Get the modal element
-    var modal = document.getElementById("service-details-modal");
+    document.addEventListener('DOMContentLoaded', function () {
+      // Get the modal element
+      var modal = document.getElementById("service-details-modal");
 
-    // Get the <span> element that closes the modal
-    var closeBtn = document.getElementsByClassName("close")[0];
+      // Get the <span> element that closes the modal
+      var closeBtn = document.getElementsByClassName("close")[0];
 
-    // Function to open the modal and display service details
-    function openModal(serviceName, serviceDescription) {
-      var serviceNameElement = document.getElementById("ser-name");
-      var serviceDescriptionElement = document.getElementById("user-email");
+      // Function to open the modal and display service details
+      function openModal(serviceName, serviceDescription) {
+        var serviceNameElement = document.getElementById("ser-name");
+        var serviceDescriptionElement = document.getElementById("user-email");
 
-      serviceNameElement.textContent = "Service Name: " + serviceName;
-      serviceDescriptionElement.textContent = "Service Description: " + serviceDescription;
+        serviceNameElement.textContent = "Service Name: " + serviceName;
+        serviceDescriptionElement.textContent = "Service Description: " + serviceDescription;
 
-      modal.style.display = "block";
-    }
+        modal.style.display = "block";
+      }
 
-    // Function to close the modal
-    function closeModal() {
-      modal.style.display = "none";
-    }
+      // Function to close the modal
+      function closeModal() {
+        modal.style.display = "none";
+      }
 
-    // Get all the service name elements
-    var serviceNames = document.getElementsByClassName("ser-name");
+      // Get all the service name elements
+      var serviceNames = document.getElementsByClassName("ser-name");
 
-    // Loop through the service name elements and add click event listeners
-    for (var i = 0; i < serviceNames.length; i++) {
-      serviceNames[i].addEventListener("click", function () {
-        var serviceName = this.textContent.trim(); // Get the service name
-        var serviceDescription = this.nextElementSibling.textContent; // Get the service description
-        openModal(serviceName, serviceDescription);
-      });
-    }
+      // Loop through the service name elements and add click event listeners
+      for (var i = 0; i < serviceNames.length; i++) {
+        serviceNames[i].addEventListener("click", function () {
+          var serviceName = this.textContent.trim(); // Get the service name
+          var serviceDescription = this.parentNode.querySelector("td:nth-child(2)").textContent; // Get the service description
+          openModal(serviceName, serviceDescription);
+        });
+      }
 
-    // Event listener to close the modal when clicking on the close button
-    closeBtn.addEventListener("click", closeModal);
+      // Event listener to close the modal when clicking on the close button
+      closeBtn.addEventListener("click", closeModal);
+    });
+
+
   </script>
 </body>
 

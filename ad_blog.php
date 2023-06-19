@@ -1,3 +1,29 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['submit'])) {
+        $title = $_POST['blog_title'];
+        $author = $_POST['blog_author'];
+        $date = $_POST['blog_date'];
+        $content = $_POST['blog_content'];
+        $name = $_POST['blog_name'];
+
+        $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $sql = "INSERT INTO blogs (title, author, date, content, bl_name) VALUES ('$title', '$author', '$date', '$content' , '$name')";
+        if ($conn->query($sql) === TRUE) {
+            header("Location: ad_blog.php");
+            echo "blog added successfully.";
+        } else {
+            echo "Error adding blog: " . $conn->error;
+        }
+
+        $conn->close();
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +36,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
         <script src="logic.js"></script> -->
-        <style>
+    <style>
         .header-home {
             min-height: 100vh;
             width: 101%;
@@ -46,27 +72,25 @@
             <i class="fa fa-bars" onclick="showMenu()"></i>
         </nav>
 
-    <!-- <div class="admin-panel"> -->
+        <!-- <div class="admin-panel"> -->
         <h2>BLOGS</h2>
         <br>
         <!-- Add Blog Form -->
-        <form id="add-blog-form">
+        <form id="add-blog-form" action="" method="post">
             <h3>Add Blog</h3>
+            <input type="text" name="blog_name" placeholder="Blog name" required>
             <input type="text" name="blog_title" placeholder="Blog Title" required>
             <input type="text" name="blog_author" placeholder="Blog Author" required>
             <input type="text" name="blog_date" placeholder="Blog Date" required>
             <textarea name="blog_content" placeholder="Blog Content" required></textarea>
-            <input type="file" name="blog_image" accept="image/*" required>
-            
-            <input type="file" name="blog_image" accept="image/*" required>
-            
-            <input type="file" name="blog_image" accept="image/*" required>
-            
-            <button type="submit">Add Blog</button>
+            <input type="file" name="blog_image1" accept="image/*">
+            <input type="file" name="blog_image2" accept="image/*">
+            <input type="file" name="blog_image3" accept="image/*">
+            <button type="submit" name="submit">Add Blog</button>
         </form>
         <br><br><br>
         <!-- Blog Table -->
-    </div>
+        </div>
     </section>
     <table id="blog-table">
         <thead>
@@ -81,24 +105,30 @@
         </thead>
         <tbody>
             <!-- Rows will be dynamically added/updated via JavaScript -->
-            <tr>
-                <td>haircare</td>
-                <td class="blog-name">dvcsvcsdhvcsdmcbsdncbnmc</td>
-                <td>img//</td>
-                <td>xyz</td>
-                <td>12 june</td>
-                <td><button class="pre-button">Preview</button> <button class="delete-button">Delete</button> </td>
-
-            </tr>
-            <tr>
-                <td>Skincare</td>
-                <td class="blog-name">dvcsvcsdhvcsdmcbsdncbnmc</td>
-                <td>img//</td>
-                <td>abc</td>
-                <td>15 jan</td>
-                <td><button class="pre-button">Preview</button> <button class="delete-button">Delete</button> </td>
-
-            </tr>
+            <?php
+            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            $sql2 = "SELECT * FROM blogs";
+            $result = $conn->query($sql2);
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    $name = $row['bl_name'];
+                    $title = $row['title'];
+                    $author = $row['author'];
+                    $date = $row['date'];
+                    echo '<tr>
+                    <td>',$name,'</td>
+                    <td class="blog-name">',$title,'</td>
+                    <td>img//</td>
+                    <td>',$author,'</td>
+                    <td>',$date,'</td>
+                    <td><button class="pre-button">Preview</button> <button class="delete-button">Delete</button> </td>
+    
+                </tr>';
+                }
+            } ?>
 
         </tbody>
     </table>
