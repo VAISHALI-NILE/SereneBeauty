@@ -41,12 +41,17 @@
                     
                     if ($_SESSION['flag']) {
                         $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
                         if ($f === 0) {
 
                             echo "<li><a href='signUp.html'>SIGN UP</a></li>";
                             echo "<li><a href='login.html'>LOG IN</a></li>";
                         } else {
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
                         }
                     } else {
                         echo "<li><a href='signUp.html'>SIGN UP</a></li>";

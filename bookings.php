@@ -109,13 +109,151 @@
       color: #fff;
       border-color: #333;
     }
-    h1{
+
+    h1 {
       color: white;
+    }
+
+    nav {
+      display: flex;
+      padding: 2% 6%;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav img {
+      width: 150px;
+    }
+
+    .nav-links {
+      flex: 1;
+      text-align: right;
+    }
+
+    .nav-links ul li {
+      list-style: none;
+      display: inline-block;
+      padding: 8px 12px;
+      position: relative;
+    }
+
+    .nav-links ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .nav-links ul li::after {
+      content: '';
+      width: 0%;
+      height: 2px;
+      background: #b4b0a6;
+      display: block;
+      margin: auto;
+      transition: 0.5s;
+    }
+
+    .nav-links ul li:hover::after {
+      width: 100%;
+    }
+
+    .text-box {
+      width: 90%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .text-box h1 {
+      font-size: 62px;
+      color: #fff;
+    }
+
+    .text-box p {
+      margin: 10px 0 40px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 12px 34px;
+      font-size: 13px;
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hero-btn:hover {
+      border: 1px solid #b4b0a6;
+      background: #b4b0a6;
+      transition: 1s;
+    }
+
+    nav .fa {
+      display: none;
+    }
+
+    @media(max-width: 700px) {
+      .text-box h1 {
+        font-size: 20px;
+      }
+
+      .nav-links ul li {
+        display: block;
+      }
+
+      .nav-links {
+        position: absolute;
+
+        height: 100vh;
+        width: 200px;
+        background-color: rgba(180, 176, 166, 0.8);
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+      }
+
+      nav .fa {
+        display: block;
+        color: #fff;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+      }
+
+      .nav-links ul {
+        padding: 30px;
+      }
     }
   </style>
 </head>
 
 <body>
+  <section class="header-services">
+    <nav>
+      <a href="index2.php"><img src="images/logo-white.png" alt=""></a>
+      <div class="nav-links" id="navlinks">
+        <i class="fa fa-times" onclick="hideMenu()"></i>
+        <ul>
+          <li><a href="index2.php">HOME</a></li>
+          <li><a href="services.php">SERVICES</a></li>
+          <li><a href="blog.php">BLOGS</a></li>
+          <li><a href='user_pannel.php'>USER</a></li>";
+
+
+        </ul>
+      </div>
+      <i class="fa fa-bars" onclick="showMenu()"></i>
+    </nav>
+  </section>
   <h1>Booking Page</h1>
 
   <div class="booking-form">

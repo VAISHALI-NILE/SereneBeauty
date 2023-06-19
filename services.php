@@ -128,7 +128,7 @@
                             <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                                 vehicula risus libero.</p>
                             <p class="card-price">RS 190</p>
-                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                            <a class="hero-btn" href="bookings.php">Book Now</a>
                         </div>
                     </div>
                     <div class="card">
@@ -138,7 +138,7 @@
                             <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                                 vehicula risus libero.</p>
                             <p class="card-price">Rs 190</p>
-                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                            <a class="hero-btn" href="bookings.php">Book Now</a>
                         </div>
                     </div>
                     <div class="card">
@@ -148,7 +148,7 @@
                             <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
                                 vehicula risus libero.</p>
                             <p class="card-price">Rs 190</p>
-                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                            <a class="hero-btn" href="bookings.php">Book Now</a>
                         </div>
                     </div>
                     <!-- Add more product cards here -->
@@ -180,7 +180,7 @@
                                 <h2 class="card-title">', $name, '</h2>
                                 <p class="card-description">', $dis, '</p>
                                 <p class="card-price">Rs ', $cost, '</p>
-                                <a class="hero-btn" href="bookings.html">Book Now</a>
+                                <a class="hero-btn" href="bookings.php">Book Now</a>
                             </div>
                         </div>';
                             }
@@ -216,7 +216,7 @@
                             <h2 class="card-title">', $name, '</h2>
                             <p class="card-description">', $dis, '</p>
                             <p class="card-price">Rs ', $cost, '</p>
-                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                            <a class="hero-btn" href="bookings.php">Book Now</a>
                         </div>
                     </div>';
                                 }
@@ -252,7 +252,7 @@
                             <h2 class="card-title">', $name, '</h2>
                             <p class="card-description">', $dis, '</p>
                             <p class="card-price">Rs ', $cost, '</p>
-                            <a class="hero-btn" href="bookings.html">Book Now</a>
+                            <a class="hero-btn" href="bookings.php">Book Now</a>
                         </div>
                     </div>';
                                     }
