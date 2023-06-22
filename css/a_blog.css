@@ -149,7 +149,7 @@ input[type="file"] {
 	font-weight: 500;
 	color: #333;
   }
-form {
+#add-blog-form {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -160,7 +160,7 @@ form {
     opacity: 0.9;
 }
 
-form input[type="text"],input[type="file"],
+form input[type="text"],input[type="file"],input[type="date"],
 form textarea {
     border: none;
     border-bottom: 2px solid #ddd;
@@ -174,7 +174,7 @@ form textarea {
     color: #333;
 }
 
-form input[type="text"],input[type="file"],
+form input[type="text"],input[type="file"],input[type="date"],
 form textarea:focus {
     outline: none;
     border-color: #c8baa8;
@@ -213,29 +213,13 @@ tr:hover {
 }
 
 .delete-button {
-    background-color: #776461;
+    background-color: #ce9b82;
+    padding: 10px 20px;
     border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .pre-button {
     background-color: #ce9b82;
+    padding: 10px 20px;
     border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
 }

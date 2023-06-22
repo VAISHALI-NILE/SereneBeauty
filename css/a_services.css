@@ -115,12 +115,15 @@ nav .fa{
     margin-bottom: 0%;
 }
 
-h2 {
+#h {
     text-align: center;
     color: white;
 }
 
-
+h2{
+    text-align: center;
+    color: black;
+}
   
 
   input[type="file"] {
@@ -136,7 +139,7 @@ h2 {
 	color: #333;
   }
   
-form {
+#add-service-form {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -150,7 +153,7 @@ h3{
     
     color: black;
 }
-form input[type="text"] {
+form input[type="text"],select {
     border: none;
 	border-bottom: 2px solid #ddd;
 	box-sizing: border-box;
@@ -162,7 +165,7 @@ form input[type="text"] {
 	font-weight: 500;
 	color: #333;
 }
-input[type="text"]:focus{
+input[type="text"] , select:focus{
   outline: none;
   border-color: #c8baa8;
 }
@@ -199,16 +202,8 @@ tr:hover {
 }
 .delete-button {
     background-color: #776461;
+    padding: 10px 20px;
     border: none;
-    color: white;
-    padding: 6px 12px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
   }
   .modal {
     display: none;

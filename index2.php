@@ -30,10 +30,12 @@
             <div class="nav-links" id="navlinks">
                 <i class="fa fa-times" onclick="hideMenu()"></i>
                 <ul>
+                    
                     <li><a href="index2.php">HOME</a></li>
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="blog.php">BLOGS</a></li>
                     <?php
+                    
                     if(!isset($_SESSION['flag']))
                     {
                         session_start();
@@ -65,8 +67,8 @@
         </nav>
         <div class="text-box">
             <h1>Beautify inside n out</h1>
-            <p>Pellentesque hlbbmnvabitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit
-                amet quam egestas semper. Aenean ultricies mi vitae est.</p>
+            <p>Welcome to our haven of beauty, where dreams come true and confidence is ignited. Step into our world of exquisite pampering, 
+                where our skilled professionals will curate a personalized experience to unveil your true radiance and leave you feeling like royalty.</p>
             <a href="services.php" class="hero-btn">get started</a>
 
         </div>
@@ -74,10 +76,10 @@
 
     <!---------------Intro------------------>
     <section class="intro">
-        <h1>Intro</h1>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-            Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero
-            sit amet quam egestas semper. Aenean ultricies mi vitae est. <br><br>
+        <h1>Introduction</h1>
+        <p>Beauty is not just skin-deep; it's an expression of your unique essence. Our salon celebrates the artistry of beauty, embracing diversity and individuality.
+             With our curated range of services, from skincare to hairstyling, we strive to enhance your natural beauty while honoring your distinct personality. 
+            Trust us to illuminate your inner glow and make you feel beautiful, inside and out. <br><br>
             <hr>
         </p>
     </section>

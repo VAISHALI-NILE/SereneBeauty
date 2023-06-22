@@ -35,17 +35,32 @@
 					<li><a href="index2.php">HOME</a></li>
 					<li><a href="services.php">SERVICES</a></li>
 					<li><a href="blog.php">BLOGS</a></li>
-					<?php 
-					session_start();
-					if($_SESSION['flag'] === 0)
-					{   
-						echo "<li><a href='signUp.html'>SIGN UP</a></li>";
-						echo "<li><a href='login.html'>LOG IN</a></li>";
-					}
-					else{
-						echo "<li><a href='user_pannel.php'>USER</a></li>";
-					}
-					?>
+					<?php
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
+
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
+                        echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                        echo "<li><a href='login.html'>LOG IN</a></li>";
+                    }
+
+                    ?>
 					
 				</ul>
 			</div>
@@ -75,7 +90,7 @@
 			  </div>
 			  <div class="owner-text">
 				
-				<p><h4>Mrs. Abcdefg lmonp stfu</h4>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae esthabitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero.</p>
+				<p><h4>Mrs. Vijaya wadgure</h4>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae esthabitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero.</p>
 			  </div>
 			</div>
 		  </div>

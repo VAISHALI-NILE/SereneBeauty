@@ -140,3 +140,10 @@ body {
   .cancel-btn {
 	margin-top: 10px;
   }
+  .logout-btn2{
+	margin-left: 10;
+	background-color: #838285;
+	border: none;
+	color: white;
+	font-size: 1.1rem;
+  }

@@ -50,11 +50,13 @@
 			text-decoration: none;
 			font-size: 13px;
 		}
+
 		a {
 			color: burlywood;
 			text-decoration: none;
 			font-size: 13px;
 		}
+
 		.nav-links ul li::after {
 			content: '';
 			width: 0%;
@@ -92,9 +94,10 @@
 		.hero-btn {
 			display: inline-block;
 			text-decoration: none;
-			color: #fff;
-			border: 1px solid #fff;
-			padding: 12px 34px;
+			color: black;
+			border: none;
+			border-bottom: 1px solid #b4b0a6;
+			padding: 5px 20px;
 			font-size: 13px;
 			background: transparent;
 			position: relative;
@@ -102,7 +105,7 @@
 		}
 
 		.hero-btn:hover {
-			border: 1px solid #b4b0a6;
+			border-bottom: 1px solid #b4b0a6;
 			background: #b4b0a6;
 			transition: 1s;
 		}
@@ -189,14 +192,31 @@
 					<li><a href="services.php">SERVICES</a></li>
 					<li><a href="blog.php">BLOGS</a></li>
 					<?php
-					session_start();
-					if ($_SESSION['flag'] === 0) {
-						echo "<li><a href='signUp.html'>SIGN UP</a></li>";
-						echo "<li><a href='login.html'>LOG IN</a></li>";
-					} else {
-						echo "<li><a href='user_pannel.php'>USER</a></li>";
-					}
-					?>
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
+
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
+                        echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                        echo "<li><a href='login.html'>LOG IN</a></li>";
+                    }
+
+                    ?>
 
 				</ul>
 			</div>
@@ -212,60 +232,62 @@
 			<br><br>
 			<div class="col-div-6">
 				<div class="box-1">
-					<img src="images/skincare.jpg" class="b-img">
+					<img src="images/img1.png" class="b-img">
 					<h3 class="heading1">Skincare</h3>
 					<p class="blog-heading">Healthy Skin Healthy you</p>
 					<p class="text">The two big lifestyle inputs that i feel make the most difference though are
 						water(suprise,suprise!) and exercise(Shocker!!)</p>
-					<p class="text">It participates in making me look healthier  <a href="readblog.php">MORE..</a> </p>
+					<p class="text">It participates in making me look healthier	</p>							
+						<form action="readblog.php" method="GET">
+							<input type="hidden" name="bl_id" value=1>
+							<button type="submit" class="hero-btn">MORE..</button>
+						</form>
 					<span class="name">Neha Shah . MAR 21, 2023</span>
 				</div>
 			</div>
 			<div class="col-div-6">
-				<div class="lr-box">
-					<div class="col-div-6">
-						<h3 class="heading1">haircare</h3>
-						<p class="blog-heading-1">Love is in the hair!!</p>
-						<p class="text"> Washing every few days is a hard habit to build up to , especially if you have
-							oily hairs <a href="readblog.php">MORE..</a></p>
-						<span class="name">Jeshtha. SEP 21, 2021</span>
-					</div>
-					<div class="col-div-6">
-						<img src="images/haicare.jpg" class="b-img-1">
-					</div>
-					<div class="clearfix"></div>
-					<hr class="line">
-				</div>
+				<?php
+
+				$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+				$sql = "SELECT * FROM blogs WHERE pos = 1";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					while ($row = $result->fetch_assoc()) {
+						$name = $row['bl_name'];
+						$author = $row['author'];
+						$date = $row['date'];
+						$title = $row['title'];
+						$imageData = $row['blog_image1'];
+						// $_SESSION['id'] = $row['bl_id'];
+				
+						// Decode the Base64-encoded image data
+						$decodedImage = base64_decode($imageData);
+						$imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+						// Display the image
+						echo '
+						<div class="lr-box">
+							<div class="col-div-6">
+								<h3 class="heading1">' . $name . '</h3>
+								<p class="blog-heading-1">' . $title . '</p>
+								<p class="text">Washing every few days is a hard habit to build up to, especially if you have oily hairs</p>
+								<form action="readblog.php" method="GET">
+									<input type="hidden" name="bl_id" value="' . $row['bl_id'] . '">
+									<button type="submit" class="hero-btn">MORE..</button>
+								</form>
+								<span class="name">' . $author . '. ' . $date . '</span>
+							</div>
+							<div class="col-div-6">
+							<img class="b-img-1" src="' . $imgSrc . '" alt="Image">
+							</div>
+							<div class="clearfix"></div>
+							<hr class="line">
+						</div>';
 
 
-				<div class="lr-box">
-					<div class="col-div-6">
-						<h3 class="heading1"> Nails Anatomy</h3>
-						<p class="blog-heading-1">Do you Really know it ? </p>
-						<p class="text">Our Nails are often the mirror of the general state of health <a href="readblog.php">MORE..</a> </p>
-						<span class="name">shreya Singh . Apr 21, 2023</span>
-					</div>
-					<div class="col-div-6">
-						<img src="images/nails-anatomy.jpg" class="b-img-1">
-					</div>
-					<div class="clearfix"></div>
-					<hr class="line">
-				</div>
 
-				<div class="lr-box">
-					<div class="col-div-6">
-						<h3 class="heading1">Manicure and Pedicure</h3>
-						<p class="blog-heading-1">Benefits of good manicure and pedicure</p>
-						<p class="text">It provides the deep clean to your nails ,as well as insures that they look
-							great <a href="readblog.php">MORE..</a></p>
-						<span class="name">Divya Singh . Dec 21, 2022</span>
-					</div>
-					<div class="col-div-6">
-						<img src="images/manicure-and-pedicure.jpg" class="b-img-1">
-					</div>
-					<div class="clearfix"></div>
-					<hr class="line">
-				</div>
+					}
+				}
+				?>
 
 			</div>
 
@@ -280,61 +302,39 @@
 		<div class="container" style="text-align:center;">
 			<h3>Latest stories</h3>
 			<br>
+			<?php
 
-			<div class="box-2">
-				<img src="images/hair-slugging.jpg" class="b-img-1">
-				<h3 class="heading1">Hair Slugging</h3>
-				<p class="blog-heading-1">Why is this new Trend And Does It Really Work ??</p>
-				<p class="text">The idea behind hair slugging is that the oils will penetrate and deeply moisture your
-					hair while you sleep, giving it the hydration it needsto flourish <a href="readblog.php">MORE..</a> </p>
-				<span class="name">Divya Jain . Jan 21, 2023</span>
-			</div>
+			$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+			$sql = "SELECT * FROM blogs WHERE pos = 0";
+			$result = $conn->query($sql);
 
-			<div class="box-2">
-				<img src="images/tan-removing.jpg" class="b-img-1">
-				<h3 class="heading1">Tan Removing</h3>
-				<p class="blog-heading-1">Which Face Pack is best for tan removing </p>
-				<p class="text">FCL's De tan Face Mask could be the best choice. It contains milk protein,natural AHA's
-					etc  <a href="readblog.php">MORE..</a> </p>
-				<span class="name">Divya Jain . SEP 21, 2021</span>
-			</div>
-
-			<div class="box-2">
-				<img src="images/spf.jpg" class="b-img-1">
-				<h3 class="heading1">Knowing SPF</h3>
-				<p class="blog-heading-1"> What is SPF</p>
-				<p class="text">Sun protection factor is a term commonly used in the cosmetics industry to describe the
-					level of protection againts the UV radiation <a href="readblog.php">MORE..</a></p>
-				<span class="name">Neha Shah. SEP 21, 2021</span>
-			</div>
-
-			<div class="clearfix"></div>
-
-			<div class="box-2">
-				<img src="images/natural-hair-care.jpg" class="b-img-1">
-				<h3 class="heading1">Natural haircare products</h3>
-				<p class="blog-heading-1">This is the ultimate guide to buy natural haircare products</p>
-				<p class="text">Depending on the hair type ,you may also need hair products that dekiver moisture and
-					help lock in it .  <a href="readblog.php">MORE..</a></p>
-				<span class="name">vijaya. MAR 1, 2023</span>
-			</div>
-
-			<div class="box-2">
-				<img src="images/wolf-cut.jpg" class="b-img-1">
-				<h3 class="heading1">Wolf cut</h3>
-				<p class="blog-heading-1">Why the wolf cut is trending </p>
-				<p class="text">This new take on the "business at the front ,party at the back" style <a href="readblog.php">MORE..</a></p>
-				<span class="name">shraddha chavan . dec 21, 2022</span>
-			</div>
-
-			<div class="box-2">
-				<img src="images/vitamin-c.jpg" class="b-img-1">
-				<h3 class="heading1">Vitamin C</h3>
-				<p class="blog-heading-1">Myth or truth</p>
-				<p class="text">Vitamin C helps your face look firmer and more alastic is because its necessary
-					componants to create collagen <a href="readblog.php">MORE..</a>yyyyy</p>
-				<span class="name">jaya wagh . SEP 21, 2022</span>
-			</div>
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+					$name = $row['bl_name'];
+					$author = $row['author'];
+					$date = $row['date'];
+					$title = $row['title'];
+					$imageData = $row['blog_image1'];
+					// Decode the Base64-encoded image data
+					$decodedImage = base64_decode($imageData);
+					$imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+					// Display the image
+					echo '<div class="box-2">
+					<img class="b-img-1" src="' . $imgSrc . '" alt="Image">
+					<h3 class="heading1">', $name, '</h3>
+					<p class="blog-heading-1">', $title, '</p>
+					<p class="text">The idea behind hair slugging is that the oils will penetrate and deeply moisture your
+						hair while you sleep, giving it the hydration it needsto flourish 
+						<form action="readblog.php" method="GET">
+									<input type="hidden" name="bl_id" value="' . $row['bl_id'] . '">
+									<button type="submit" class="hero-btn">MORE..</button>
+								</form>
+					</p>
+					<span class="name">', $author, ' . ', $date, '</span>
+				</div>';
+				}
+			}
+			?>
 
 			<div class="clearfix"></div>
 		</div>

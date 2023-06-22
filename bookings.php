@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if (isset($_GET['book_now'])) {
+  $s_id = $_GET['book_now'];
+  if( $_SESSION['id']===1){
+    $c_id = $_SESSION['id'];
+  }
+  else {
+    header("location: signup.html");
+  }
+
+}
+
+?>
 <html>
 
 <head>
@@ -17,6 +30,8 @@
       background-position: center;
       background-size: cover;
       position: relative;
+      margin: 0px;
+      padding: 0px;
     }
 
     h1 {
@@ -47,7 +62,7 @@
     }
 
     input[type="text"],
-    input[type="email"],
+    input[type="name"],
     input[type="date"],
     select {
       border: none;
@@ -246,7 +261,32 @@
           <li><a href="index2.php">HOME</a></li>
           <li><a href="services.php">SERVICES</a></li>
           <li><a href="blog.php">BLOGS</a></li>
-          <li><a href='user_pannel.php'>USER</a></li>";
+          <?php
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
+
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
+                        echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                        echo "<li><a href='login.html'>LOG IN</a></li>";
+                    }
+
+                    ?>
 
 
         </ul>
@@ -255,34 +295,107 @@
     </nav>
   </section>
   <h1>Booking Page</h1>
+  <?php
+$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
-  <div class="booking-form">
-    <form id="bookingForm">
-      <div class="form-group">
-        <label for="email">Name:</label>
-        <input type="email" id="email" name="email" required>
-      </div>
+// Retrieve booked time slots for the selected date
+$bookedSlots = array();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $time = $_POST['time'];
+    $date = $_POST['date'];
 
-      <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
-      </div>
+    $sql = "SELECT time FROM bookings WHERE date = '$date'";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $bookedSlots[] = $row['time'];
+        }
+    }
+}
 
-      <div class="form-group">
-        <label for="time">Time:</label>
-        <div class="time-slots">
-          <div class="time-slot">09:00 AM</div>
-          <div class="time-slot">10:00 AM</div>
-          <div class="time-slot">11:00 AM</div>
-          <div class="time-slot">12:00 PM</div>
-        </div>
-      </div>
+// Display the form with available time slots for the selected date
+echo '<div class="booking-form">
+  <form id="bookingForm" action="" method="post">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
 
-      <div class="form-group">
-        <input type="submit" value="Submit">
-      </div>
-    </form>
-  </div>
+    <div class="form-group">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" onchange="getAvailableTimeSlots()" required>
+    </div>
+
+    <select name="time" placeholder="Time slot" required id="timeSlots" disabled>
+      <option value="" disabled selected>Select Date First</option>
+    </select>
+
+    <div class="form-group">
+      <input type="submit" name="submit" value="Submit">
+    </div>
+  </form>
+</div>';
+
+echo '<script>
+function getAvailableTimeSlots() {
+  var dateInput = document.getElementById("date");
+  var selectedDate = dateInput.value;
+
+  if (selectedDate !== "") {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var timeSlots = JSON.parse(this.responseText);
+        var timeSelect = document.getElementById("timeSlots");
+        timeSelect.innerHTML = "<option value=\'\' disabled selected>Select Time</option>";
+
+        if (timeSlots.length > 0) {
+          for (var i = 0; i < timeSlots.length; i++) {
+            var option = document.createElement("option");
+            option.value = timeSlots[i];
+            option.text = timeSlots[i] ;
+            timeSelect.appendChild(option);
+          }
+          timeSelect.disabled = false;
+        } else {
+          var option = document.createElement("option");
+          option.value = "";
+          option.disabled = true;
+          option.text = "No available time slots";
+          timeSelect.appendChild(option);
+          timeSelect.disabled = true;
+        }
+      }
+    };
+    xhttp.open("GET", "getAvailableTimeSlots.php?date=" + selectedDate, true);
+    xhttp.send();
+  }
+}
+</script>';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+    $selectedDate = $_POST['date'];
+    $selectedTime = $_POST['time'];
+
+    if (!empty($selectedDate) && !empty($selectedTime)) {
+        // Insert the booking into the database
+        $sql = "INSERT INTO bookings (name, c_id, s_id, date, time) VALUES ('$name', $c_id, $s_id, '$selectedDate', '$selectedTime')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo '<script>alert("Booking successful");</script>';
+        } else {
+            echo '<script>alert("Booking unsuccessful");</script>';
+        }
+    }
+}
+
+$conn->close();
+?>
+
 
 </body>
 

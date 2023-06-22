@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+
+<?php
+if (isset($_GET['bl_id'])) {
+    $bl_id = $_GET['bl_id'];
+}
+?>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,29 +41,84 @@
                     <li><a href="index2.php">HOME</a></li>
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="blog.php">BLOGS</a></li>
+                    <?php
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
+
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
+                        echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                        echo "<li><a href='login.html'>LOG IN</a></li>";
+                    }
+
+                    ?>
             </div>
             <i class="fa fa-bars" onclick="showMenu()"></i>
         </nav>
     </section>
     <section class="blog-content">
         <div class="container">
-            <h1 class="blog-title">Healthy Skin Healthy you</h1>
-            <div class="blog-meta">
-                <span class="author">By Shraddha Chavan</span>
-                <span class="date">June 18, 2023</span>
-            </div>
-            <div class="blog-images">
-                <img src="images/b1.jpg" alt="Image 1">
+            <?php
+            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+            
+          
 
-            </div>
-            <div class="blog-text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia tellus velit, id finibus turpis rhoncus ac. Nullam scelerisque, elit vitae fermentum fermentum, eros tellus feugiat est, vel dignissim mi libero sed nisi. Fusce auctor, felis a ultrices cursus, lectus ipsum efficitur risus, in posuere dolor neque ut mi. Quisque in lectus sed nisi auctor tincidunt. Integer interdum aliquet purus, in aliquet lorem malesuada sed. Nullam sit amet posuere ligula. Vestibulum vitae tellus leo. Nulla facilisi. Ut gravida, est id ultricies pulvinar, velit lorem tempus ipsum, non finibus velit elit a orci.</p>
-                <img src="images/b2.jpg" alt="Image 2">
-                <p>Suspendisse sagittis ullamcorper efficitur. Curabitur nec semper tellus, nec vulputate velit. Vestibulum aliquam enim tellus, et condimentum tortor hendrerit vitae. Nam scelerisque libero ut est congue lobortis. Aenean ut convallis nunc, vel ullamcorper lectus. Mauris volutpat justo vel enim ullamcorper, a ultricies nibh viverra. Integer interdum semper tortor sed pharetra.</p> 
-                <img src="images/b3.jpg" alt="Image 3">
-                <p>In efficitur, ex sit amet fermentum egestas, mi neque finibus tellus, eu sagittis sem risus nec nibh. Sed et auctor nunc. Vestibulum id lorem eget risus aliquam elementum. Mauris ac condimentum massa. Nulla tincidunt gravida bibendum. Aliquam iaculis neque sed turpis scelerisque, non venenatis turpis faucibus. Sed tincidunt efficitur lacus non ullamcorper.</p>
-            </div>
-        </div>
+			$sql = "SELECT * FROM blogs WHERE bl_id = $bl_id";
+			$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				$row = $result->fetch_assoc();
+					$name = $row['bl_name'];
+					$author = $row['author'];
+					$date = $row['date'];
+					$title = $row['title'];
+                    $content = $row['content'];
+					$imageData1 = $row['blog_image1'];
+                    $imageData2 = $row['blog_image2'];
+                    $imageData3 = $row['blog_image3'];
+
+                    $decodedImage1 = base64_decode($imageData1);
+                    $decodedImage2 = base64_decode($imageData2);
+                    $decodedImage3 = base64_decode($imageData3);
+
+                    $imgSrc1 = 'data:image/jpeg;base64,' . base64_encode($decodedImage1);
+                    $imgSrc2 = 'data:image/jpeg;base64,' . base64_encode($decodedImage2);
+                    $imgSrc3 = 'data:image/jpeg;base64,' . base64_encode($decodedImage3);
+
+                    echo ' <h1 class="blog-title">',$title,'</h1>
+                    <div class="blog-meta">
+                        <span class="author">By ',$author,'</span>
+                        <span class="date">',$date,'</span>
+                    </div>
+                    <div class="blog-images">
+                    <img class="bl-img"  src="' . $imgSrc1 . '" alt="Image 1">
+        
+                    </div>
+                    <div class="blog-text">
+                        <p>vaishali  ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lacinia tellus velit, id finibus turpis rhoncus ac. Nullam scelerisque, elit vitae fermentum fermentum, eros tellus feugiat est, vel dignissim mi libero sed nisi. Fusce auctor, felis a ultrices cursus, lectus ipsum efficitur risus, in posuere dolor neque ut mi. Quisque in lectus sed nisi auctor tincidunt. Integer interdum aliquet purus, in aliquet lorem malesuada sed. Nullam sit amet posuere ligula. Vestibulum vitae tellus leo. Nulla facilisi. Ut gravida, est id ultricies pulvinar, velit lorem tempus ipsum, non finibus velit elit a orci.</p>
+                        <img class="bl-img" src="' . $imgSrc2 . '" alt="Image 2">
+                        <p>',$content,'</p> 
+                        <img class="bl-img" src="' . $imgSrc3 . '" alt="Image 3">
+                        <p>In efficitur, ex sit amet fermentum egestas, mi neque finibus tellus, eu sagittis sem risus nec nibh. Sed et auctor nunc. Vestibulum id lorem eget risus aliquam elementum. Mauris ac condimentum massa. Nulla tincidunt gravida bibendum. Aliquam iaculis neque sed turpis scelerisque, non venenatis turpis faucibus. Sed tincidunt efficitur lacus non ullamcorper.</p>
+                    </div>
+                </div>';
+            }
+            ?>
+           
     </section>
 <hr>
     <section class="footer">

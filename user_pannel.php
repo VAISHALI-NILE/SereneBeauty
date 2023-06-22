@@ -1,18 +1,27 @@
-<!DOCTYPE html>
+<?php 
+if (isset($_POST['logout'])) {
+    session_destroy(); // Destroy the session
+    header("Location: index2.php"); // Redirect the user to the desired page after logout
+    exit();
+}
+?>
 <html>
 <head>
   <title>User Info Page</title>
   <link rel="stylesheet" href="css/user_style.css">
   <script>
-    function toggleSection(sectionId) {
-      var sections = document.getElementsByClassName("content-section");
-      for (var i = 0; i < sections.length; i++) {
-        sections[i].style.display = "none";
-      }
-      var section = document.getElementById(sectionId);
-      section.style.display = "block";
+  function toggleSection(sectionId) {
+    var sections = document.getElementsByClassName("content-section");
+    for (var i = 0; i < sections.length; i++) {
+      sections[i].style.display = "none";
     }
-  </script>
+    var section = document.getElementById(sectionId);
+    section.style.display = "block";
+  }
+
+  // Display the first section by default
+  toggleSection('edit-details');
+</script>
 </head>
 <body>
 <style>
@@ -159,55 +168,104 @@ nav .fa{
 <?php
 
 
-	session_start();
-	$id = $_SESSION['id'];
-	// $conn = $_SESSION['conn'];
-	$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
-	$sql = "SELECT  f_name,l_name,email,mob_no,city,area FROM customer WHERE id = $id";
-	$result = $conn->query($sql);
-	
-	if ($result->num_rows > 0) {
-			$row = $result->fetch_assoc();
-			$fname = $row['f_name'];
-			$lname = $row['l_name'];
-			$email = $row['email'];
-			$mob_no = $row['mob_no'];
-			$city = $row['city'];
-			$area = $row['area'];
-	} else {
-		echo "0 results";
-	}
-	
+session_start();
+$id = $_SESSION['id'];
+$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+$sql = "SELECT  f_name,l_name,email,mob_no,city,area FROM customer WHERE id = $id";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  $row = $result->fetch_assoc();
+  $fname = $row['f_name'];
+  $lname = $row['l_name'];
+  $email = $row['email'];
+  $mob_no = $row['mob_no'];
+  $city = $row['city'];
+  $area = $row['area'];
+} else {
+  echo "0 results";
+}
 
+if (isset($_POST['submit']))
+{
+	$id = $_SESSION['id'];
+  $conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$f_name = $_POST["fname"];
+	$l_name = $_POST["lname"];
+	$email = $_POST["email"];
+	$mob_no = $_POST["phone"];
+	$city = $_POST["city"];
+	$area = $_POST["area"];
+	
+	$sql = "UPDATE customer SET f_name='$f_name',l_name='$l_name',email='$email',city='$city',area='$area',mob_no=$mob_no WHERE id = $id";
+	$r = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		
+	}
+   }
+}
+if (isset($_POST['logout2'])) {
+    session_destroy(); // Destroy the session
+    header("Location: start.php"); // Redirect the user to the desired page after logout
+    exit();
+}
 ?>
 <!-- ==========================header======================================== -->
 <section class="header-home">
-	<nav>
-		<a href="index2.php"><img src="images/logo-white.png" alt=""></a>
-		<div class="nav-links" id="navlinks">
-			<i class="fa fa-times" onclick="hideMenu()"></i>
-			<ul>
-				<li><a href="index2.php">HOME</a></li>
-				<li><a href="services.php">SERVICES</a></li>
-				<li><a href="blog.php">BLOGS</a></li>
+  <nav>
+    <a href="index2.php"><img src="images/logo-white.png" alt=""></a>
+    <div class="nav-links" id="navlinks">
+      <i class="fa fa-times" onclick="hideMenu()"></i>
+      <ul>
+        <li><a href="index2.php">HOME</a></li>
+        <li><a href="services.php">SERVICES</a></li>
+        <li><a href="blog.php">BLOGS</a></li>
+		<?php
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
 
-				
-			</ul>
-		</div>
-		<i class="fa fa-bars" onclick="showMenu()"></i>
-	</nav>
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
+                        echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                        echo "<li><a href='login.html'>LOG IN</a></li>";
+                    }
 
-<!-- =================================side menu============================ -->
-<div class="container">
-  <div class="menu">
-	<ul>
-	  <li><a href="javascript:void(0);" onclick="toggleSection('edit-details')">Edit User Details</a></li>
-	  <li><a href="javascript:void(0);" onclick="toggleSection('upcoming-bookings')">Upcoming Bookings</a></li>
-	  <li><a href="javascript:void(0);" onclick="toggleSection('previous-bookings')">Previous Bookings</a></li>
-	  <li><a href="javascript:void(0);" onclick="toggleSection('change-password')">Change Password</a></li>
-	  <li><a href="javascript:void(0);" onclick="toggleSection('logout')">logOut</a></li>
-	</ul>
-  </div>
+                    ?>
+      </ul>
+    </div>
+    <i class="fa fa-bars" onclick="showMenu()"></i>
+  </nav>
+
+  <!-- =================================side menu============================ -->
+  <div class="container">
+    <div class="menu">
+      <ul>
+        <li><a href="javascript:void(0);" onclick="toggleSection('edit-details')">Edit User Details</a></li>
+        <li><a href="javascript:void(0);" onclick="toggleSection('upcoming-bookings')">Upcoming Bookings</a></li>
+        <li><a href="javascript:void(0);" onclick="toggleSection('previous-bookings')">Previous Bookings</a></li>
+        <!-- <li><a href="javascript:void(0);" onclick="toggleSection('change-password')">Change Password</a></li> -->
+		<li>
+          <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+            <button type="submit" class="logout-btn2" name="logout2">Log Out</button>
+          </form>
+        </li>
+      </ul>
+    </div>
 <!-- ===========================================user details section=========================================== -->
   <div class="content">
 	<section id="edit-details" class="content-section">
@@ -251,26 +309,12 @@ nav .fa{
 
 
 		<br>
-		<input type="submit" class="btn" id="edituser" value="Save">
+		<button type="submit" class="btn" id="edituser" name="submit">Save</button>
 	  </form>
 <!-- ===============================update user details====================================== -->
 	  <?php
 	  
-	  if($_SESSION['flag']===1)
-	  {
-		$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-		  $f_name = $_POST["fname"];
-		  $l_name = $_POST["lname"];
-		  $email = $_POST["email"];
-		  $mob_no = $_POST["phone"];
-		  $city = $_POST["city"];
-		  $area = $_POST["area"];
-		  echo "<h1> working</h1>";
-		  $sql = "UPDATE customer SET f_name='$f_name',l_name='$l_name',email='$email',city='$city',area='$area',mob_no=$mob_no WHERE id = $id";
-		  
-		 }
-	  }
+
 
 	  ?>
 	</section>
@@ -310,67 +354,90 @@ nav .fa{
 	  <br>
 	  <br>
 	  <div class="booking-list">
-		<div class="booking-item">
-		  <h3>Haircut </h3><br>
-		  <table>
-			<tr>
-				<td><b>June 5, 2023</b> 03:15 PM </td>
-				<td id="money"> 190RS</td>
-			</tr>
-		  </table>
+	  <?php
 
-		  <button class="btn cancel-btn">Edit</button>
-		  <button class="btn cancel-btn">Cancel</button>
-		</div>
-		<div class="booking-item">
-			<h3>Haircut </h3><br>
-			<table>
-			  <tr>
-				  <td><b>June 5, 2023</b> 03:15 PM </td>
-				  <td id="money"> 190RS</td>
-			  </tr>
-			</table>
 
-			<button class="btn cancel-btn">Edit</button>
-			<button class="btn cancel-btn">Cancel</button>
-		  </div>
-	</section>
+$id = $_SESSION['id'];
+$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['booking_id'])) {
+    $bookingId = $_POST['booking_id'];
+
+    // Delete the booking from the database
+    $deleteSql = "DELETE FROM bookings WHERE b_id ='$bookingId'";
+
+    if ($conn->query($deleteSql) === TRUE) {
+       // echo "Booking canceled successfully.",$bookingId;
+    } else {
+       // echo "Error canceling the booking: " . $conn->error;
+    }
+}
+$sql = "SELECT * FROM bookings WHERE c_id = $id";
+
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $s_id = $row['s_id'];
+        $date = $row['date'];
+        $time = $row['time'];
+		$bookingID = $row['b_id'];
+
+        $sql2 = "SELECT * FROM service WHERE s_id = $s_id";
+        $result2 = $conn->query($sql2);
+        $row2 = $result2->fetch_assoc();
+
+        $cost = $row2['cost'];
+        $name = $row2['name'];
+
+        echo '<div class="booking-item">
+        <h3>' . $name . '</h3><br>
+        <table>
+          <tr>
+              <td><b>' . $date . '</b> ' . $time . ' </td>
+              <td id="money"> ' . $cost . 'RS</td>
+          </tr>
+        </table>
+
+      </div>';
+// 	  <form method="post" action="">
+// 	  <input type="hidden" name="booking_id" value="<?php echo $bookingId; ?">
+// 	  <button type="submit" class="btn cancel-btn">Cancel</button>
+//   </form>
+    }
+}
+?>
+
 <!-- =============================================chnage password======================================= -->
-	<section id="change-password" class="content-section" style="display: none;">
-	  <h2>Change Password</h2>
-	  <br>
-	  <br>
-	  <form>
-		<label for="current-password">Current Password:</label>
-		<input type="password" id="current-password" name="current-password">
-		<br>
-		<label for="new-password">New Password:</label>
-		<input type="password" id="new-password" name="new-password">
-		<br>
-		<label for="confirm-password">Confirm Password:</label>
-		<input type="password" id="confirm-password" name="confirm-password">
-		<br>
-		<br>
-		<input type="submit" class="btn" value="Change Password">
-	  </form>
-	</section>
-<!-- =============================logout=================================== -->
-	<!-- <section id="logout">
-	<form action="">
-	<input type="submit" class="btn" value="LOG OUT">
-	</form> -->
-	<!-- //<?php
-	// if(isset($_POST['submit']))
-	// { 
-	// 		$_SESSION['flag'] = 0;
-	// 		header("Location: index2.php");
-		
-	// }
-	// ?>
-		<h3>Logged Out</h3>
-	</section>
-	</section> -->
-  </div>
+	  
+<section id="change-password" class="content-section" style="display: none;">
+    <h2>Change Password</h2>
+    <br>
+    <br>
+    <form>
+      <label for="current-password">Current Password:</label>
+      <input type="password" id="current-password" name="current-password">
+      <br>
+      <label for="new-password">New Password:</label>
+      <input type="password" id="new-password" name="new-password">
+      <br>
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password">
+      <br>
+      <br>
+      <input type="submit" class="btn" value="Change Password">
+    </form>
+  </section>
 </div>
+<!-- =============================logout=================================== -->
+<section id="logout" class="content-section" style="display: none;">
+  <h2>Log Out</h2>
+  <br>
+  <br>
+  <form method="post">
+    <input type="submit" class="btn" name="logout" value="Log Out">
+  </form>
+</section>
+
 </body>
 </html>

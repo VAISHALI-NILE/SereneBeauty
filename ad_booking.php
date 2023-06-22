@@ -75,22 +75,41 @@
           <th>Status</th>
 
         </tr>
-        <tr>
-          <td>June 10, 2023</td>
-          <td>10:00 AM</td>
-          <td class="user-name">John Doe</td>
-          <td>Haircut</td>
+        <?php
+
+          $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+          $sql = "SELECT * FROM bookings WHERE status = 1";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                  $s_id = $row['s_id'];
+                  $c_id = $row['c_id'];
+                  $time = $row['time'];
+                  $date = $row['date'];
+
+                  $sql2 = "SELECT * FROM customer WHERE id = '$c_id'";
+                  $result2 = $conn->query($sql2);
+                  $row2 = $result2->fetch_assoc();
+                  $c_name = $row2['name'];
+                  $phone = $row2['mob_no'];
+
+                  $sql3 = "SELECT * FROM service WHERE s_id = '$s_id'";
+                  $result3 = $conn->query($sql3);
+                  $row3 = $result3->fetch_assoc();
+                  $s_name = $row3['name'];
+                  echo 
+        '<tr>
+          <td>',$date,'</td>
+          <td>',$time,'</td>
+          <td class="user-name">',$c_name,'</td>
+          <td>',$s_name,'</td>
           <td>Completed</td>
 
-        </tr>
-        <tr>
-          <td>June 15, 2023</td>
-          <td>2:30 PM</td>
-          <td class="user-name">Jane Smith</td>
-          <td>Manicure</td>
-          <td>Completed</td>
-
-        </tr>
+        </tr>';
+              }
+            }
+        ?>
         <!-- Add more rows for previous bookings here -->
       </table>
     </div>
@@ -104,24 +123,47 @@
           <th>Customer Name</th>
           <th>Service</th>
           <th>Status</th>
-          <th>Action</th>
+          <!-- <th>Action</th> -->
         </tr>
-        <tr>
-          <td>June 20, 2023</td>
-          <td>9:30 AM</td>
-          <td class="user-name">Michael Johnson</td>
-          <td>Facial</td>
-          <td>Pending</td>
-          <td><button class="cancel-button">Cancel</button> <button class="confirm-button">Confirm</button></td>
+        <?php
+
+$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$sql = "SELECT * FROM bookings WHERE status = 0";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $s_id = $row['s_id'];
+        $c_id = $row['c_id'];
+        $time = $row['time'];
+        $date = $row['date'];
+
+        $sql2 = "SELECT * FROM customer WHERE id = '$c_id'";
+        $result2 = $conn->query($sql2);
+        $row2 = $result2->fetch_assoc();
+        $c_name = $row2['f_name'];
+        // $c_name2 = $row2['l_name'];
+        $phone = $row2['mob_no'];
+        $enail = $row2['email'];
+
+        $sql3 = "SELECT * FROM service WHERE s_id = '$s_id'";
+        $result3 = $conn->query($sql3);
+        $row3 = $result3->fetch_assoc();
+        $s_name = $row3['name'];
+        echo 
+        '<tr>
+        <td>',$date,'</td>
+        <td>',$time,'</td>
+        <td class="user-name">',$c_name,'</td>
+        <td>',$s_name,'</td>
+        <td>Pending</td>
+       
         </tr>
-        <tr>
-          <td>June 25, 2023</td>
-          <td>3:00 PM</td>
-          <td class="user-name">Sarah Williams</td>
-          <td>Pedicure</td>
-          <td>Pending</td>
-          <td><button class="cancel-button">Cancel</button> <button class="confirm-button">Confirm</button></td>
-        </tr>
+        </tr>';
+         // <td><button class="cancel-button">Cancel</button> <button class="confirm-button">Confirm</button></td>
+    }
+  }
+?>
+       
         <!-- Add more rows for upcoming bookings here -->
       </table>
     </div>

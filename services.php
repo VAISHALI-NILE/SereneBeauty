@@ -93,13 +93,30 @@
                     <li><a href="services.php">SERVICES</a></li>
                     <li><a href="blog.php">BLOGS</a></li>
                     <?php
-                    session_start();
-                    if ($_SESSION['flag'] === 0) {
+					if(!isset($_SESSION['flag']))
+                    {
+                        session_start();
+                    }
+                    
+                    if ($_SESSION['flag']) {
+                        $f = $_SESSION['flag'];
+                        $i = $_SESSION['id'];
+                        if ($f === 0) {
+
+                            echo "<li><a href='signUp.html'>SIGN UP</a></li>";
+                            echo "<li><a href='login.html'>LOG IN</a></li>";
+                        } else {
+                            echo "<li><a href='user_pannel.php'>USER</a></li>";
+                            if($i === '3')
+                            {
+                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                            }
+                        }
+                    } else {
                         echo "<li><a href='signUp.html'>SIGN UP</a></li>";
                         echo "<li><a href='login.html'>LOG IN</a></li>";
-                    } else {
-                        echo "<li><a href='user_pannel.php'>USER</a></li>";
                     }
+
                     ?>
 
                 </ul>
@@ -115,46 +132,47 @@
     <!-- ----------------------services section------------------------- -->
     <!-------------------------Special sevice section------------------------>
     <div class="container">
-        <section class="ser-section">
-            <div class="serv">
-                <div class="container">
-                    <h1 class="lg-title">Special services with offers</h1>
-                    <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-                        . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
-                    <div class="card">
-                        <img src="images/hair-services.jpg" alt="Product 1">
+                <section class="ser-section">
+                    <div class="serv">
+                        <div class="container">
+                            <h1 class="lg-title">Special Services That we provide</h1>
+                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
+                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                                mi vitae est.</p>
+                            <?php
+
+                            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+                            $sql = "SELECT * FROM service WHERE type='special'";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $name = $row['name'];
+                                    $cost = $row['cost'];
+                                    $dis = $row['description'];
+                                    $imageData = $row['img'];
+                                    // Decode the Base64-encoded image data
+                                    $decodedImage = base64_decode($imageData);
+                                    $imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+                                    // Display the image
+                                    echo '<div class="card">
+                                    <img src="' . $imgSrc . '" alt="Image">
                         <div class="card-content">
-                            <h2 class="card-title">Haircut</h2>
-                            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                vehicula risus libero.</p>
-                            <p class="card-price">RS 190</p>
-                            <a class="hero-btn" href="bookings.php">Book Now</a>
+                            <h2 class="card-title">', $name, '</h2>
+                            <p class="card-description">', $dis, '</p>
+                            <p class="card-price">Rs ', $cost, '</p>
+                            <form action="bookings.php" method="GET">
+                            <button type="submit" class="hero-btn" name="book_now" value="' . $row['s_id'] . '">Book Now</button>
+                        </form>
+                        </div>
+                    </div>';
+                                }
+                            }
+                            ?>
+                            <!-- Add more product cards here -->
                         </div>
                     </div>
-                    <div class="card">
-                        <img src="images/makeup-service.jpg" alt="Product 1">
-                        <div class="card-content">
-                            <h2 class="card-title">MakeUp</h2>
-                            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                vehicula risus libero.</p>
-                            <p class="card-price">Rs 190</p>
-                            <a class="hero-btn" href="bookings.php">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img src="images/skincare-service.jpg" alt="Product 1">
-                        <div class="card-content">
-                            <h2 class="card-title">FacePacks</h2>
-                            <p class="card-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                                vehicula risus libero.</p>
-                            <p class="card-price">Rs 190</p>
-                            <a class="hero-btn" href="bookings.php">Book Now</a>
-                        </div>
-                    </div>
-                    <!-- Add more product cards here -->
-                </div>
-            </div>
-        </section>
+
         <!------------------------------Hair services---------------------------->
         <div class="container">
             <section class="ser-section">
@@ -164,9 +182,8 @@
                         <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames
                             ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
                         <?php
-
                         $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-                        $sql = "SELECT name, description, cost FROM service WHERE type = 'hair'";
+                        $sql = "SELECT * FROM service WHERE type = 'hair'";
                         $result = $conn->query($sql);
 
                         if ($result->num_rows > 0) {
@@ -174,35 +191,49 @@
                                 $name = $row['name'];
                                 $cost = $row['cost'];
                                 $dis = $row['description'];
+                                $imageData = $row['img'];
+                                // Decode the Base64-encoded image data
+                                $decodedImage = base64_decode($imageData);
+                                $imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+                                // Display the image
                                 echo '<div class="card">
-                            <img src="images/hair-services.jpg" alt="Product 1">
-                            <div class="card-content">
-                                <h2 class="card-title">', $name, '</h2>
-                                <p class="card-description">', $dis, '</p>
-                                <p class="card-price">Rs ', $cost, '</p>
-                                <a class="hero-btn" href="bookings.php">Book Now</a>
-                            </div>
-                        </div>';
+                                <img src="' . $imgSrc . '" alt="Image">
+                                <div class="card-content">
+                                    <h2 class="card-title">' . $name . '</h2>
+                                    <p class="card-description">' . $dis . '</p>
+                                    <p class="card-price">Rs ' . $cost . '</p>
+
+
+                                    <form action="bookings.php" method="GET">
+                                    <button type="submit" class="hero-btn" name="book_now" value="' . $row['s_id'] . '">Book Now</button>
+                                </form>
+								</form>
+                                </div>
+                            </div>';
+
                             }
                         }
                         ?>
+
+
+
                         <!-- Add more product cards here -->
                     </div>
                 </div>
             </section>
-            <!------------------------------Skincare services---------------------------->
+            <!-- --------------------------------skin services--------------------------> 
             <div class="container">
                 <section class="ser-section">
                     <div class="serv">
                         <div class="container">
                             <h1 class="lg-title">Skincare Services That we provide</h1>
-                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada
-                                fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.
-                            </p>
+                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
+                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                                mi vitae est.</p>
                             <?php
 
                             $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-                            $sql = "SELECT name, description, cost FROM service WHERE type ='skin'";
+                            $sql = "SELECT * FROM service WHERE type='skin'";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -210,13 +241,20 @@
                                     $name = $row['name'];
                                     $cost = $row['cost'];
                                     $dis = $row['description'];
+                                    $imageData = $row['img'];
+                                    // Decode the Base64-encoded image data
+                                    $decodedImage = base64_decode($imageData);
+                                    $imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+                                    // Display the image
                                     echo '<div class="card">
-                        <img src="images/hair-services.jpg" alt="Product 1">
+                                    <img src="' . $imgSrc . '" alt="Image">
                         <div class="card-content">
                             <h2 class="card-title">', $name, '</h2>
                             <p class="card-description">', $dis, '</p>
                             <p class="card-price">Rs ', $cost, '</p>
-                            <a class="hero-btn" href="bookings.php">Book Now</a>
+                            <form action="bookings.php" method="GET">
+                            <button type="submit" class="hero-btn" name="book_now" value="' . $row['s_id'] . '">Book Now</button>
+                        </form>
                         </div>
                     </div>';
                                 }
@@ -225,59 +263,69 @@
                             <!-- Add more product cards here -->
                         </div>
                     </div>
-                </section>
-                <!------------------------------Makeup services---------------------------->
-                <div class="container">
-                    <section class="ser-section">
-                        <div class="serv">
-                            <div class="container">
-                                <h1 class="lg-title">Makeup Services That we provide</h1>
-                                <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
-                                    malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                                    mi vitae est.</p>
-                                <?php
 
-                                $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-                                $sql = "SELECT name, description, cost FROM service WHERE type='makeup'";
-                                $result = $conn->query($sql);
+            <!------------------------------Makeup services---------------------------->
+            <div class="container">
+                <section class="ser-section">
+                    <div class="serv">
+                        <div class="container">
+                            <h1 class="lg-title">Makeup Services That we provide</h1>
+                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
+                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                                mi vitae est.</p>
+                            <?php
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $name = $row['name'];
-                                        $cost = $row['cost'];
-                                        $dis = $row['description'];
-                                        echo '<div class="card">
-                        <img src="images/hair-services.jpg" alt="Product 1">
+                            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+                            $sql = "SELECT * FROM service WHERE type='makeup'";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    $name = $row['name'];
+                                    $cost = $row['cost'];
+                                    $dis = $row['description'];
+                                    $imageData = $row['img'];
+                                    $s_id = $row['s_id'];
+                                    // Decode the Base64-encoded image data
+                                    $decodedImage = base64_decode($imageData);
+                                    $imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
+                                    // Display the image
+                                    echo '<div class="card">
+                                    <img src="' . $imgSrc . '" alt="Image">
                         <div class="card-content">
+                        
                             <h2 class="card-title">', $name, '</h2>
                             <p class="card-description">', $dis, '</p>
                             <p class="card-price">Rs ', $cost, '</p>
-                            <a class="hero-btn" href="bookings.php">Book Now</a>
+                            
+                            <form action="bookings.php" method="GET">
+                            <button type="submit" class="hero-btn" name="book_now" value="' . $row['s_id'] . '">Book Now</button>
+                        </form>
                         </div>
                     </div>';
-                                    }
                                 }
-                                ?>
-                                <!-- Add more product cards here -->
-                            </div>
+                            }
+                            ?>
+                            <!-- Add more product cards here -->
                         </div>
+                    </div>
 
-                    </section>
-                    <section class="footer">
-                        <hr style="margin-left: 10%; margin-right: 10%;">
-                        <a href="aboutus.php">
-                            <h4>About Us</h4>
-                        </a>
-                        <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis
-                            egestas.
-                            Vestibulum tortor qua</p>
-                        <div class="icons">
-                            <a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
-                            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
-                            <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://www.twitter.com"><i class="fab fa-twitter-square"></i></a>
-                            <p>&copy; 2023 Serene Beauty. All Rights Reserved.</p>
-                        </div>
+                </section>
+                <section class="footer">
+                    <hr style="margin-left: 10%; margin-right: 10%;">
+                    <a href="aboutus.php">
+                        <h4>About Us</h4>
+                    </a>
+                    <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis
+                        egestas.
+                        Vestibulum tortor qua</p>
+                    <div class="icons">
+                        <a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
+                        <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.twitter.com"><i class="fab fa-twitter-square"></i></a>
+                        <p>&copy; 2023 Serene Beauty. All Rights Reserved.</p>
+                    </div>
 
-                    </section>
+                </section>
 </body>

@@ -12,18 +12,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO blogs (title, author, date, content, bl_name) VALUES ('$title', '$author', '$date', '$content' , '$name')";
-        if ($conn->query($sql) === TRUE) {
-            header("Location: ad_blog.php");
-            echo "blog added successfully.";
-        } else {
-            echo "Error adding blog: " . $conn->error;
+        // Prepare and execute the SQL query to insert other data into the database
+        $stmt = $conn->prepare("INSERT INTO blogs (title, author, date, content, bl_name) VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("sssss", $title, $author, $date, $content, $name);
+        $stmt->execute();
+
+        $blogId = $stmt->insert_id; // Retrieve the ID of the inserted blog
+
+        // Process and insert the image data into the database
+        $imageColumns = ['blog_image1', 'blog_image2', 'blog_image3'];
+        foreach ($imageColumns as $imageColumn) {
+            if (isset($_FILES[$imageColumn]) && $_FILES[$imageColumn]['error'] === UPLOAD_ERR_OK) {
+                $tempFile = $_FILES[$imageColumn]['tmp_name'];
+                $imageData = file_get_contents($tempFile);
+                $imageData = base64_encode($imageData);
+                $stmt = $conn->prepare("UPDATE blogs SET $imageColumn = ? WHERE bl_id = ?");
+                
+                $stmt->bind_param("si", $imageData, $blogId);
+                $stmt->execute();
+            }
         }
 
+        $stmt->close();
         $conn->close();
+
+        header("Location: ad_blog.php");
+        exit();
     }
 }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -76,12 +95,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2>BLOGS</h2>
         <br>
         <!-- Add Blog Form -->
-        <form id="add-blog-form" action="" method="post">
+        <form id="add-blog-form" action="" method="post" enctype="multipart/form-data">
             <h3>Add Blog</h3>
             <input type="text" name="blog_name" placeholder="Blog name" required>
             <input type="text" name="blog_title" placeholder="Blog Title" required>
             <input type="text" name="blog_author" placeholder="Blog Author" required>
-            <input type="text" name="blog_date" placeholder="Blog Date" required>
+            <input type="date" name="blog_date" class="date-input" placeholder="Blog Date" required>
             <textarea name="blog_content" placeholder="Blog Content" required></textarea>
             <input type="file" name="blog_image1" accept="image/*">
             <input type="file" name="blog_image2" accept="image/*">
@@ -97,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <tr>
                 <th>Title</th>
                 <th>Content</th>
-                <th>Image</th>
                 <th>Author</th>
                 <th>Date</th>
                 <th>Actions</th>
@@ -110,25 +128,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
+                $delete_id = $_POST['delete_id'];
+                $sql_delete = "DELETE FROM blogs WHERE bl_id = '$delete_id'";
+                if ($conn->query($sql_delete) === TRUE) {
+                    header("Location: ad_blog.php");
+                    echo "Row deleted successfully.";
+                } else {
+                    echo "Error deleting row: " . $conn->error;
+                }
+            }
+
             $sql2 = "SELECT * FROM blogs";
             $result = $conn->query($sql2);
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
+                    $id = $row['bl_id'];
                     $name = $row['bl_name'];
                     $title = $row['title'];
                     $author = $row['author'];
                     $date = $row['date'];
                     echo '<tr>
-                    <td>',$name,'</td>
-                    <td class="blog-name">',$title,'</td>
-                    <td>img//</td>
-                    <td>',$author,'</td>
-                    <td>',$date,'</td>
-                    <td><button class="pre-button">Preview</button> <button class="delete-button">Delete</button> </td>
-    
-                </tr>';
+            <td>', $name, '</td>
+            <td class="blog-name">', $title, '</td>
+            <td>', $author, '</td>
+            <td>', $date, '</td>
+            <td>
+                <form class="btn-form" method="POST" action="">
+                    <input type="hidden" class="delete-button" name="delete_id" value="' . $id . '">
+                    
+                  <button type="submit" class="delete-button">Delete</button>
+                  </form>
+                  <br>
+                  <form class="btn-form" method="GET" action="readblog.php">
+                    <input type="hidden" name="bl_id" value="' . $row['bl_id'] . '">
+                    <button type="submit" class="preview-button">Preview</button>
+                </form>
+            </td>
+            </tr>';
                 }
-            } ?>
+            }
+            ?>
+        </tbody>
+
 
         </tbody>
     </table>

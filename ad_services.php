@@ -10,19 +10,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-
-    $sql = "INSERT INTO service (name, description, cost, type) VALUES ('$service_name', '$service_description', '$service_cost', '$service_type')";
-    if ($conn->query($sql) === TRUE) {
-      header("Location: ad_services.php");
-      echo "Service added successfully.";
-    } else {
-      echo "Error adding service: " . $conn->error;
+    // Prepare and execute the SQL query to insert service data into the database
+    $stmt = $conn->query("INSERT INTO service (name, description, cost, type) VALUES ('$service_name', '$service_description', $service_cost, '$service_type')");
+    if (!$stmt) {
+      die("Error in preparing statement: " . $conn->error);
     }
+    $serviceId = $conn->insert_id; // Retrieve the ID of the inserted service
 
+    // Process and insert the image data into the database
+    if (isset($_FILES['service_image']) && $_FILES['service_image']['error'] === UPLOAD_ERR_OK) {
+      $tempFile = $_FILES['service_image']['tmp_name'];
+      $imageData = file_get_contents($tempFile);
+      $imageData = base64_encode($imageData);
+      $imageData = mysqli_real_escape_string($conn, $imageData);
+
+      $stmt = $conn->query("UPDATE service SET img = '$imageData' WHERE s_id = $serviceId");
+      if (!$stmt) {
+        die("Error in preparing statement: " . $conn->error);
+      }
+    }
+    $_SESSION['service_added'] = true;
     $conn->close();
+
+    header("Location: ad_services.php");
+
+    // Check if the service was added successfully
+    if (isset($_SESSION['service_added'])): ?>
+    <script>
+      alert("Service added successfully");
+    </script>
+      <?php unset($_SESSION['service_added']); // Reset the session variable ?>
+    <?php endif;
+    exit();
   }
 }
 ?>
+
+
 
 
 <html>
@@ -74,19 +98,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </nav>
 
     <div class="admin-panel">
-      <h2>SERVICES</h2>
+      <h2 id="h">SERVICES</h2>
       <br>
       <!-- Add Service Form -->
 
-      <form id="add-service-form" action="" method="post">
+      <form id="add-service-form" action="" method="post" enctype="multipart/form-data">
         <h3>Add Service</h3>
         <input type="text" name="service_name" placeholder="Service Name" required>
         <input type="text" name="service_description" placeholder="Service Description" required>
         <input type="text" name="service_cost" placeholder="Service Cost" required>
-        <input type="text" name="service_type" placeholder="Service Type" required>
-        <input type="file" id="blog_image" name="blog_image" accept="image/*" required>
+        <select name="service_type" placeholder="Service Type" required>
+          <option value="" disabled selected>Select Type</option>
+          <option value="hair">Hair</option>
+          <option value="skin">skin</option>
+          <option value="makeup">Makeup</option>
+          <option value="special">Special</option>
+        </select>
+        <input type="file" id="service_image" name="service_image" accept="image/*" required>
         <button type="submit" name="submit">Add Service</button>
       </form>
+
       <br><br><br>
   </section>
   <!-- ==========================adding services=================================== -->
@@ -111,32 +142,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
       }
+
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_id'])) {
+        $delete_id = $_POST['delete_id'];
+        $sql_delete = "DELETE FROM service WHERE s_id = '$delete_id'";
+        if ($conn->query($sql_delete) === TRUE) {
+          header("Location: ad_services.php");
+          echo "Row deleted successfully.";
+        } else {
+          echo "Error deleting row: " . $conn->error;
+        }
+      }
+
       $sql2 = "SELECT * FROM service";
       $result = $conn->query($sql2);
       if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+          $s_id = $row['s_id'];
           $name = $row['name'];
           $cost = $row['cost'];
           $dis = $row['description'];
           $ty = $row['type'];
           echo '<tr>
-      <td class="ser-name">', $name, '</td>
-      <td>', $dis, '</td>
-      <td>', $cost, '</td>
-      <td>', $ty, '</td>
-      <td><button class="delete-button">Delete</button> </td>
-      </tr>';
+            <td class="ser-name">', $name, '</td>
+            <td>', $dis, '</td>
+            <td>', $cost, '</td>
+            <td>', $ty, '</td>
+            <td>
+                <form method="POST" action="">
+                    <input type="hidden" name="delete_id" value="' . $s_id . '">
+                    <button type="submit" class="delete-button">Delete</button>
+                </form>
+            </td>
+            </tr>';
         }
-      } ?>
+      }
+      ?>
     </tbody>
   </table>
+
 
 
   <div id="service-details-modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
       <h2 id="ser-name"></h2>
-      <p id="user-email"></p>
+      <p id="discription"></p>
     </div>
   </div>
   </div>
@@ -152,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Function to open the modal and display service details
       function openModal(serviceName, serviceDescription) {
         var serviceNameElement = document.getElementById("ser-name");
-        var serviceDescriptionElement = document.getElementById("user-email");
+        var serviceDescriptionElement = document.getElementById("discription");
 
         serviceNameElement.textContent = "Service Name: " + serviceName;
         serviceDescriptionElement.textContent = "Service Description: " + serviceDescription;
@@ -180,6 +231,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // Event listener to close the modal when clicking on the close button
       closeBtn.addEventListener("click", closeModal);
     });
+
+
 
 
   </script>
