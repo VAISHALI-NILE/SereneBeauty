@@ -208,7 +208,7 @@
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -344,8 +344,7 @@
 		<a href="aboutus.php">
 			<h4>About Us</h4>
 		</a>
-		<p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis egestas.
-			Vestibulum tortor qua</p>
+		<p>We are a passionate team of beauty enthusiasts dedicated to celebrating and exploring the world of beauty. Our mission is to inspire and empower individuals to embrace their unique beauty and enhance their self-confidence.</p>
 		<div class="icons">
 			<a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
 			<a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>

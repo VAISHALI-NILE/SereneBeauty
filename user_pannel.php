@@ -196,8 +196,8 @@ if (isset($_POST['submit']))
 	$mob_no = $_POST["phone"];
 	$city = $_POST["city"];
 	$area = $_POST["area"];
-	
-	$sql = "UPDATE customer SET f_name='$f_name',l_name='$l_name',email='$email',city='$city',area='$area',mob_no=$mob_no WHERE id = $id";
+  $password = $_POST["password"];
+	$sql = "UPDATE customer SET f_name='$f_name',l_name='$l_name',email='$email',city='$city',area='$area',mob_no=$mob_no,password='$password' WHERE id = $id";
 	$r = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		
@@ -237,7 +237,7 @@ if (isset($_POST['logout2'])) {
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -255,9 +255,14 @@ if (isset($_POST['logout2'])) {
   <div class="container">
     <div class="menu">
       <ul>
-        <li><a href="javascript:void(0);" onclick="toggleSection('edit-details')">Edit User Details</a></li>
-        <li><a href="javascript:void(0);" onclick="toggleSection('upcoming-bookings')">Upcoming Bookings</a></li>
-        <li><a href="javascript:void(0);" onclick="toggleSection('previous-bookings')">Previous Bookings</a></li>
+        <li><a href="javascript:void(0);" onclick="toggleSection('edit-details')">Edit User Details</a></li> 
+        <?php
+        if($i !== '3')
+        {
+          echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'upcoming-bookings\')">Upcoming Bookings</a></li>';
+          echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'previous-bookings\')">Previous Bookings</a></li>';
+        }
+        ?>
         <!-- <li><a href="javascript:void(0);" onclick="toggleSection('change-password')">Change Password</a></li> -->
 		<li>
           <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -304,6 +309,16 @@ if (isset($_POST['logout2'])) {
 		<div style="flex: 1;">
 			<label for="phone">Phone No:</label>
 			<input type="text" id="tl" name="phone" value=<?php echo $mob_no?>>
+		</div>
+		</div>
+    <div style="display: flex;">
+		<div style="flex: 1;">
+			<label for="password">Password:</label>
+			<input type="text" id="t" name="password" >
+		</div>
+		<div style="flex: 1;">
+			<label for="c-password">Confirm Password:</label>
+			<input type="text" id="tl" name="c-password" >
 		</div>
 		</div>
 

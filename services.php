@@ -109,7 +109,7 @@
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -125,8 +125,7 @@
         </nav>
         <div class="text-box">
             <h1>OUR SERVICES</h1>
-            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet
-                quam egestas semper. Aenean ultricies mi vitae est.</p>
+            <p>Discover your true beauty with our comprehensive range of exceptional beauty services.Our skilled professionals are dedicated to enhancing your natural features and providing a luxurious experience.</p>
         </div>
     </section>
     <!-- ----------------------services section------------------------- -->
@@ -136,9 +135,7 @@
                     <div class="serv">
                         <div class="container">
                             <h1 class="lg-title">Special Services That we provide</h1>
-                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
-                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                                mi vitae est.</p>
+                            <p class="text-light">we offer a range of special services designed to provide an extraordinary and unforgettable beauty experience. Our special services include:</p>
                             <?php
 
                             $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
@@ -179,8 +176,7 @@
                 <div class="serv">
                     <div class="container">
                         <h1 class="lg-title">Hair Services That we provide</h1>
-                        <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et malesuada fames
-                            ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
+                        <p class="text-light"> Whether you're looking for a stylish haircut, a vibrant new hair color, or a special occasion updo, we offer a wide range of hair services to cater to your unique needs..</p>
                         <?php
                         $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
                         $sql = "SELECT * FROM service WHERE type = 'hair'";
@@ -227,9 +223,9 @@
                     <div class="serv">
                         <div class="container">
                             <h1 class="lg-title">Skincare Services That we provide</h1>
-                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
-                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                                mi vitae est.</p>
+                            <p class="text-light">Our dedicated team of experienced estheticians and skincare professionals is committed to providing personalized treatments and solutions tailored to your unique skin type and concerns. Our skin services include:
+
+</p>
                             <?php
 
                             $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
@@ -270,9 +266,7 @@
                     <div class="serv">
                         <div class="container">
                             <h1 class="lg-title">Makeup Services That we provide</h1>
-                            <p class="text-light">Pellentesque habitant morbi tristique senectus et netus et
-                                malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                                mi vitae est.</p>
+                            <p class="text-light">Whether you're attending a special event, preparing for a photoshoot, or simply want to treat yourself to a glamorous makeover, our makeup services are tailored to your individual preferences. Our makeup services include:</p>
                             <?php
 
                             $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
@@ -316,9 +310,7 @@
                     <a href="aboutus.php">
                         <h4>About Us</h4>
                     </a>
-                    <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis
-                        egestas.
-                        Vestibulum tortor qua</p>
+                    <p>We are a passionate team of beauty enthusiasts dedicated to celebrating and exploring the world of beauty. Our mission is to inspire and empower individuals to embrace their unique beauty and enhance their self-confidence.</p>
                     <div class="icons">
                         <a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
                         <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>

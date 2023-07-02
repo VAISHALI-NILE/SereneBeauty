@@ -52,7 +52,7 @@
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -90,7 +90,7 @@
 			  </div>
 			  <div class="owner-text">
 				
-				<p><h4>Mrs. Vijaya wadgure</h4>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae esthabitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero habitant morbi tristique senectus et netus et malesuada fames ac . Donec eu libero.</p>
+				<p><h4>Mrs. Vijaya wadgure</h4>Vijaya Wadgure, the proud owner of Serene Beauty, brings a wealth of experience and passion to the beauty industry. With 7 years of expertise in Makeup, she has established Serene Beauty as a premier destination for exceptional beauty services</p>
 			  </div>
 			</div>
 		  </div>
@@ -100,9 +100,23 @@
 			<h2 >Salon Location</h2>
 			<div class="address-details">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>
-			  <p class="text-skin text-bold"> Address: <br>Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.</p>
+			  <p class="text-skin text-bold"> Address: <br>Vishal Nagar , Near gajanan mandir , Chht. Sambhajinagar</p>
 			</div>
 			<div class="map-container" id="map"></div>
+			<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.0/mapbox-gl.css" rel="stylesheet">
+
+  <!-- Initialize the map -->
+  <script>
+    mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN'; // Replace with your Mapbox access token
+
+    // Create a new map instance
+    var map = new mapboxgl.Map({
+      container: 'map', // Specify the ID of the map container
+      style: 'mapbox://styles/mapbox/streets-v11', // Specify the map style
+      center: [lng, lat], // Specify the initial center coordinates
+      zoom: 12 // Specify the initial zoom level
+    });</script>
 		  </div>
 		  
 		<section class="footer">

@@ -58,7 +58,7 @@ if (isset($_GET['bl_id'])) {
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {

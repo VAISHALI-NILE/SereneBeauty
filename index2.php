@@ -52,7 +52,7 @@
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -86,28 +86,24 @@
     <!---------------services------------>
     <section class="services">
         <h1>Services We Offer</h1>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-            Vestibulum tortor qua</p>
+        <p>Discover your true beauty with our comprehensive range of exceptional beauty services. </p>
         <div class="row">
             <div class="services-col">
                 <img src="images/hair-services.jpg" alt="">
                 <h3>HairServices</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor qua</p>
+                <p>What is this? A wolf cut is a type of haircut that is shorter and thinner on the sides with shaggy messy bangs. It emphasizes face-framing layers and rugged texture.</p>
                 <a href="services.php" class="hero-btn">Know More</a>
             </div>
             <div class="services-col">
                 <img src="images/skincare-service.jpg" alt="">
                 <h3>SkinServices</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor qua</p>
+                <p>Cleansing involves more than just your face! Wash your hands thoroughly before you begin washing your face, says Zeichner.</p>
                 <a href="services.php" class="hero-btn">Know More</a>
             </div>
             <div class="services-col">
                 <img src="images/makeup-service.jpg" alt="">
                 <h3>MakeupServices</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor qua</p>
+                <p>From newspapers to magazines, to flyers, to hoardings, the makeup looks that you see in print and media is editorial makeup.</p>
                 <a href="services.php" class="hero-btn">Know More</a>
             </div>
         </div>
@@ -115,28 +111,25 @@
     <!-------------Blogs-------------------->
     <section class="blogs">
         <h1>Blogs</h1>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac .</p>
+        <p>We're here to inspire and empower you with expert advice, product recommendations, and insider tips to help you unleash your inner beauty. </p>
         <div class="row">
             <div class="blogs-col">
                 <h3>Haircare</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor quam, </p>
+                <p>Getting your festival look spot on is not easy, especially when it comes to your hair. If you’re camping, without easy access to showers ....  </p>
                 <a href="blog.php">
                     <h6>Read more <i class="fa fa-arrow-right"></i></h6>
                 </a>
             </div>
             <div class="blogs-col">
                 <h3>Skincare</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor quam, </p>
+                <p>I usually want to go all-out on the makeup when it comes to Amber Heard. Her face is a makeup artists dream come true; she looks great in a smokey eye, an intense brow, and a serious lip. Last night, however, she said to me:..... </p>
                 <a href="blog.php">
                     <h6>Read more <i class="fa fa-arrow-right"></i></h6>
                 </a>
             </div>
             <div class="blogs-col">
                 <h3>Hygine</h3>
-                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-                    Vestibulum tortor quam,</p>
+                <p>The peach makeup trend has been hotting up since 2022, and now that summer 2023 is underway, it’s time to add some extra flavour to your style with some fruity peach....</p>
                 <a href="blog.php">
                     <h6>Read more <i class="fa fa-arrow-right"></i></h6>
                 </a>
@@ -184,8 +177,7 @@
         <a href="aboutus.php">
             <h4>About Us</h4>
         </a>
-        <p>ellentesque habitant morbi tristique senectus et netus et malesuada fames ac <br>turpis egestas.
-            Vestibulum tortor qua</p>
+        <p>We are a passionate team of beauty enthusiasts dedicated to celebrating and exploring the world of beauty. Our mission is to inspire and empower individuals to embrace their unique beauty and enhance their self-confidence.</p>
         <div class="icons">
             <a href="https://www.facebook.com"><i class="fab fa-facebook-square"></i></a>
             <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>

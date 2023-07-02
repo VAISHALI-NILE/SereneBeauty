@@ -2,10 +2,11 @@
 session_start();
 if (isset($_GET['book_now'])) {
   $s_id = $_GET['book_now'];
-  if( $_SESSION['id']===1){
+  if( $_SESSION['id']){
     $c_id = $_SESSION['id'];
   }
   else {
+    $_SESSION['bk_flag']=1;
     header("location: signup.html");
   }
 
@@ -278,7 +279,7 @@ if (isset($_GET['book_now'])) {
                             echo "<li><a href='user_pannel.php'>USER</a></li>";
                             if($i === '3')
                             {
-                                echo "<li><a href='ad_services.php'>Admin</a></li>"; 
+                                echo "<li><a href='ad_services.php'>ADMIN</a></li>"; 
                             }
                         }
                     } else {
@@ -383,7 +384,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
     if (!empty($selectedDate) && !empty($selectedTime)) {
         // Insert the booking into the database
-        $sql = "INSERT INTO bookings (name, c_id, s_id, date, time) VALUES ('$name', $c_id, $s_id, '$selectedDate', '$selectedTime')";
+        $sql = "INSERT INTO bookings (name, c_id, s_id, date, time) VALUES ('$name', $i, $s_id, '$selectedDate', '$selectedTime')";
 
         if ($conn->query($sql) === TRUE) {
             echo '<script>alert("Booking successful");</script>';

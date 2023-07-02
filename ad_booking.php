@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
-  <title>Serene Beauty | Admin-Services </title>
+  <title>Serene Beauty | ADMIN-Services </title>
   <link rel="stylesheet" href="css\a_booking.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
