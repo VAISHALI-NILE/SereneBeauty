@@ -170,7 +170,7 @@ nav .fa{
 
 session_start();
 $id = $_SESSION['id'];
-$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n". $conn -> error);
 $sql = "SELECT  f_name,l_name,email,mob_no,city,area FROM customer WHERE id = $id";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -188,7 +188,7 @@ if ($result->num_rows > 0) {
 if (isset($_POST['submit']))
 {
 	$id = $_SESSION['id'];
-  $conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+  $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n". $conn -> error);
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$f_name = $_POST["fname"];
 	$l_name = $_POST["lname"];
@@ -257,12 +257,12 @@ if (isset($_POST['logout2'])) {
       <ul>
         <li><a href="javascript:void(0);" onclick="toggleSection('edit-details')">Edit User Details</a></li> 
         <?php
-        if($i !== '3')
-        {
-          echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'upcoming-bookings\')">Upcoming Bookings</a></li>';
-          echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'previous-bookings\')">Previous Bookings</a></li>';
-        }
-        ?>
+if ($i !== '3') {
+  echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'upcoming-bookings\')">Upcoming Bookings</a></li>';
+  echo '<li><a href="javascript:void(0);" onclick="toggleSection(\'previous-bookings\')">Previous Bookings</a></li>';
+}
+?>
+
         <!-- <li><a href="javascript:void(0);" onclick="toggleSection('change-password')">Change Password</a></li> -->
 		<li>
           <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
@@ -373,7 +373,7 @@ if (isset($_POST['logout2'])) {
 
 
 $id = $_SESSION['id'];
-$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['booking_id'])) {

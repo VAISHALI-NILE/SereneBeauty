@@ -138,7 +138,7 @@
                             <p class="text-light">we offer a range of special services designed to provide an extraordinary and unforgettable beauty experience. Our special services include:</p>
                             <?php
 
-                            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
                             $sql = "SELECT * FROM service WHERE type='special'";
                             $result = $conn->query($sql);
 
@@ -178,7 +178,7 @@
                         <h1 class="lg-title">Hair Services That we provide</h1>
                         <p class="text-light"> Whether you're looking for a stylish haircut, a vibrant new hair color, or a special occasion updo, we offer a wide range of hair services to cater to your unique needs..</p>
                         <?php
-                        $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+                        $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
                         $sql = "SELECT * FROM service WHERE type = 'hair'";
                         $result = $conn->query($sql);
 
@@ -228,7 +228,7 @@
 </p>
                             <?php
 
-                            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
                             $sql = "SELECT * FROM service WHERE type='skin'";
                             $result = $conn->query($sql);
 
@@ -269,7 +269,7 @@
                             <p class="text-light">Whether you're attending a special event, preparing for a photoshoot, or simply want to treat yourself to a glamorous makeover, our makeup services are tailored to your individual preferences. Our makeup services include:</p>
                             <?php
 
-                            $conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
                             $sql = "SELECT * FROM service WHERE type='makeup'";
                             $result = $conn->query($sql);
 

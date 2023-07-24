@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Generation Time: Jul 02, 2023 at 03:47 PM
+-- Generation Time: Jul 24, 2023 at 03:44 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -82,7 +82,8 @@ CREATE TABLE `bookings` (
 INSERT INTO `bookings` (`c_id`, `s_id`, `date`, `time`, `b_id`, `status`, `name`) VALUES
 (5, 74, '2023-06-30', '13:00:00', 18, 0, 'Rudra'),
 (5, 70, '2023-07-01', '14:00:00', 19, 0, 'rudra'),
-(5, 74, '2023-06-30', '14:00:00', 20, 0, 'rudra');
+(5, 74, '2023-06-30', '14:00:00', 20, 0, 'rudra'),
+(5, 75, '2023-07-25', '09:00:00', 21, 0, 'rudra');
 
 -- --------------------------------------------------------
 
@@ -197,7 +198,7 @@ ALTER TABLE `blogs`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `b_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `customer`

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$conn = new mysqli("localhost:3307", "root", "","serenebeauty") or die("Connect failed: %s\n". $conn -> error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty")or die("Connect failed: %s\n". $conn -> error);
 
 
 $f_name = $_POST["first-name"];

@@ -297,7 +297,7 @@ if (isset($_GET['book_now'])) {
   </section>
   <h1>Booking Page</h1>
   <?php
-$conn = new mysqli("localhost:3307", "root", "", "serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
