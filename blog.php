@@ -20,7 +20,7 @@
 			background-position: center;
 			background-size: cover;
 			position: relative;
-			overflow-x: hidden;
+			overflow: hidden;
 		}
 
 		nav {
