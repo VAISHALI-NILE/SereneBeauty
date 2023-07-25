@@ -7,7 +7,7 @@ if (isset($_GET['book_now'])) {
   }
   else {
     $_SESSION['bk_flag']=1;
-    header("location: signup.html");
+    header("location: signUp.html");
   }
 
 }
@@ -17,11 +17,20 @@ if (isset($_GET['book_now'])) {
 
 <head>
   <title>serene Beauty | Bookings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+ 
   <style>
     body {
       font-family: Arial, sans-serif;
       /* background-image: url(images/login-img.jpg); */
       padding: 20px;
+      overflow-x: hidden;
     }
 
     body {
@@ -33,6 +42,7 @@ if (isset($_GET['book_now'])) {
       position: relative;
       margin: 0px;
       padding: 0px;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -397,7 +407,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 $conn->close();
 ?>
 
-
+<script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 
 </html>

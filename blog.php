@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Serene Beauty | Blogs</title>
 	<link rel="stylesheet" type="text/css" href="css/blog_style.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +20,7 @@
 			background-position: center;
 			background-size: cover;
 			position: relative;
+			overflow-x: hidden;
 		}
 
 		nav {
@@ -354,6 +355,15 @@
 		</div>
 
 	</section>
+	<script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 
 </html>

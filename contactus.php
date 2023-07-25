@@ -1,39 +1,29 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-// ...
+require_once 'vendor/autoload.php';
+use Twilio\Rest\Client;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form input values
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
+    $phone = $_POST['phone'];
 
-    require 'path/to/PHPMailer/src/PHPMailer.php';
-    require 'path/to/PHPMailer/src/SMTP.php';
+    // Send the form message via SMS using Twilio
+    $sid = "AC6992369bb06913cf9d02db0b1d23369e";
+    $token = "eb6c299f121b93f5044a9dd5c879a03b";
+    $twilio = new Client($sid, $token);
 
-    $mail = new PHPMailer();
-    $mail->isSMTP();
-    $mail->SMTPDebug = 0;  // Set to 2 for detailed SMTP debugging
-    $mail->Host = 'smtp.gmail.com';  // Specify the SMTP server
-    $mail->Port = 587;  // SMTP port (TLS encryption required by Gmail)
-    $mail->SMTPSecure = 'tls';  // Enable TLS encryption
-    $mail->SMTPAuth = true;  // Enable SMTP authentication
-    $mail->Username = 'vaishalinile896@gmail.com';  // Your Gmail address
-    $mail->Password = 'vaibhavi1027';  // Your Gmail password
+    $twilioNumber = "+12298007219";  
+    $toNumber = "+919763633212";  
 
-    $mail->setFrom($email, $name);  // Set the sender's name and email address
-    $mail->addAddress('vaishalinile896@example.com');  // Add a recipient's email address
-
-    $mail->Subject = 'New Contact Form Submission';
-    $mail->Body = "Name: $name\nEmail: $email\nMessage: $message";
-
-    if ($mail->send()) {
-        echo 'Email sent successfully.';
-    } else {
-        echo 'Error sending email: ' . $mail->ErrorInfo;
-    }
+    $twilio->messages->create(
+        $toNumber,
+        [
+            "from" => $twilioNumber,
+            "body" => "Name: $name\nEmail: $email\nPhone no.: $phone\nMessage: $message"
+        ]
+    );
 }
 
 ?>
@@ -42,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Serene Beauty | Contact Us</title>
     <link rel="stylesheet" type="text/css" href="css/contact_style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-position: center;
             background-size: cover;
             position: relative;
+            overflow-x: hidden;
         }
 
         nav {
@@ -257,6 +248,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p></p>
         </div>
     </section>
+           
     <section class="contact">
         <div class="content">
             <h2>Let's Start a Conversation</h2>
@@ -292,6 +284,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
             </div>
+            
             <div class="contactForm">
                 <form action="" method="post">
                     <h2>Send Message</h2>
@@ -304,6 +297,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span>Email</span>
                     </div>
                     <div class="inputBox">
+                        <input type="text" name="phone" required="required">
+                        <span>Phone no.</span>
+                    </div>
+                    <div class="inputBox">
                         <textarea required="required" name="message"></textarea>
                         <span>Type your Message...</span>
                     </div>
@@ -314,6 +311,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
+       
 
     </section>
     <section class="footer">
@@ -332,6 +330,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
     </section>
+    <script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
+
 </body>
 
 </html>

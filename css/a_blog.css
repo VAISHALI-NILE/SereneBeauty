@@ -93,7 +93,9 @@ nav .fa {
     .text-box h1 {
         font-size: 20px;
     }
-
+    .header-home{
+        width: 119%;
+    }
     .nav-links ul li {
         display: block;
     }

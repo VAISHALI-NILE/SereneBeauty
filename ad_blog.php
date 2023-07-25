@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 
 <head>
-    <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Serene Beauty | Admin-Blogs </title>
     <link rel="stylesheet" href="css\a_blog.css">
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,6 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
         <script src="logic.js"></script> -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .header-home {
             min-height: 100vh;
@@ -63,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-position: center;
             background-size: cover;
             position: relative;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -103,8 +112,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="date" name="blog_date" class="date-input" placeholder="Blog Date" required>
             <textarea name="blog_content" placeholder="Blog Content" required></textarea>
             <input type="file" name="blog_image1" accept="image/*">
+
             <input type="file" name="blog_image2" accept="image/*">
+
             <input type="file" name="blog_image3" accept="image/*">
+            <p style="color:red">*jpeg images only*</p><br>
             <button type="submit" name="submit">Add Blog</button>
         </form>
         <br><br><br>
@@ -175,6 +187,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </tbody>
     </table>
+    <script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Serene Beauty | ADMIN-Services </title>
   <link rel="stylesheet" href="css\a_booking.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,7 @@
             background-position: center;
             background-size: cover;
             position: relative;
+            overflow-x: hidden;
         }
     </style>
 </head>
@@ -78,7 +79,22 @@
         <?php
 
 $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-          $sql = "SELECT * FROM bookings WHERE status = 1";
+$sql = "SELECT * FROM bookings";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+  while ($row = $result->fetch_assoc()) {
+
+    $dt = $row['date'];
+    $currentDate = date('Y-m-d');
+    if ($currentDate > $dt)
+    {
+      $sql0 = "UPDATE bookings SET status = 1 WHERE date = '$dt'";
+      $conn->query($sql0);
+    }
+  }
+}          
+
+$sql = "SELECT * FROM bookings WHERE status = 1";
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {
@@ -91,22 +107,23 @@ $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC",
                   $sql2 = "SELECT * FROM customer WHERE id = '$c_id'";
                   $result2 = $conn->query($sql2);
                   $row2 = $result2->fetch_assoc();
-                  $c_name = $row2['name'];
+                  $c_name = $row2['f_name'];
                   $phone = $row2['mob_no'];
+                  $email = $row2['email'];
 
                   $sql3 = "SELECT * FROM service WHERE s_id = '$s_id'";
                   $result3 = $conn->query($sql3);
                   $row3 = $result3->fetch_assoc();
                   $s_name = $row3['name'];
                   echo 
-        '<tr>
-          <td>',$date,'</td>
-          <td>',$time,'</td>
-          <td class="user-name">',$c_name,'</td>
-          <td>',$s_name,'</td>
-          <td>Completed</td>
-
-        </tr>';
+         '<tr>
+        <td>', $date, '</td>
+        <td>', $time, '</td>
+        <td class="user-name" data-email="', $email, '" data-phone="', $phone, '">', $c_name, '</td>
+        <td>', $s_name, '</td>
+        <td>Completed</td>
+      </tr>';
+    
               }
             }
         ?>
@@ -143,22 +160,20 @@ if ($result->num_rows > 0) {
         $c_name = $row2['f_name'];
         // $c_name2 = $row2['l_name'];
         $phone = $row2['mob_no'];
-        $enail = $row2['email'];
+        $email = $row2['email'];
 
         $sql3 = "SELECT * FROM service WHERE s_id = '$s_id'";
         $result3 = $conn->query($sql3);
         $row3 = $result3->fetch_assoc();
         $s_name = $row3['name'];
-        echo 
-        '<tr>
-        <td>',$date,'</td>
-        <td>',$time,'</td>
-        <td class="user-name">',$c_name,'</td>
-        <td>',$s_name,'</td>
-        <td>Pending</td>
-       
-        </tr>
-        </tr>';
+        echo '<tr>
+  <td>', $date, '</td>
+  <td>', $time, '</td>
+  <td class="user-name" data-email="', $email, '" data-phone="', $phone, '">', $c_name, '</td>
+  <td>', $s_name, '</td>
+  <td>Pending</td>
+</tr>';
+
          // <td><button class="cancel-button">Cancel</button> <button class="confirm-button">Confirm</button></td>
     }
   }
@@ -202,44 +217,51 @@ if ($result->num_rows > 0) {
     // Add this JavaScript code for dialog box
 
     // Get the modal element
-    var modal = document.getElementById("user-details-modal");
+        var modal = document.getElementById("user-details-modal");
 
-    // Get the <span> element that closes the modal
-    var closeBtn = document.getElementsByClassName("close")[0];
+      // Get the <span> element that closes the modal
+      var closeBtn = document.getElementsByClassName("close")[0];
 
-    // Function to open the modal and display user details
-    function openModal(userName, userEmail) {
-      var userNameElement = document.getElementById("user-name");
-      var userEmailElement = document.getElementById("user-email");
+      // Function to open the modal and display user details
+      function openModal(userName, userEmail, userPhone) {
+  var userNameElement = document.getElementById("user-name");
+  var userEmailElement = document.getElementById("user-email");
+  var userPhoneElement = document.getElementById("user-phone");
 
-      userNameElement.textContent = "Name: " + userName;
-      userEmailElement.textContent = "Email: " + userEmail;
+  userNameElement.textContent = "Name: " + userName;
+  userEmailElement.textContent = "Email: " + userEmail;
+  userPhoneElement.textContent = "Phone: " + userPhone;
 
-      modal.style.display = "block";
-    }
+        modal.style.display = "block";
+      }
 
-    // Function to close the modal
-    function closeModal() {
-      modal.style.display = "none";
-    }
+      // Function to close the modal
+      function closeModal() {
+        modal.style.display = "none";
+      }
 
-    // Get all the user name elements
-    var userNames = document.getElementsByClassName("user-name");
+      var userNames = document.getElementsByClassName("user-name");
 
-    // Loop through the user name elements and add click event listeners
-    for (var i = 0; i < userNames.length; i++) {
-      userNames[i].addEventListener("click", function () {
-        var userName = this.textContent.trim(); // Get the user name
-        var userEmail = this.dataset.email; // Get the user email from the data-email attribute
-        openModal(userName, userEmail);
-      });
-    }
+      for (var i = 0; i < userNames.length; i++) {
+  userNames[i].addEventListener("click", function () {
+    var userName = this.textContent.trim(); // Get the user name
+    var userEmail = this.dataset.email; // Get the user email from the data-email attribute
+    var userPhone = this.dataset.phone; // Get the user phone number from the data-phone attribute
+    openModal(userName, userEmail, userPhone);
+  });
+}
 
-
-    closeBtn.addEventListener("click", closeModal);
-
-
-  </script>
+      closeBtn.addEventListener("click", closeModal);
+</script>
+      <script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 
 </html>
