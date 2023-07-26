@@ -229,85 +229,18 @@
 			<p>Our super helpfull skincare productive post isn't to be missed </p>
 		</div>
 	</section>
-	<section>
-		<div class="container">
-			<br><br>
-			<div class="col-div-6">
-				<div class="box-1">
-					<img src="images/img1.png" class="b-img">
-					<h3 class="heading1">Skincare</h3>
-					<p class="blog-heading">Healthy Skin Healthy you</p>
-					<p class="text">The two big lifestyle inputs that i feel make the most difference though are
-						water(suprise,suprise!) and exercise(Shocker!!)</p>
-					<p class="text">It participates in making me look healthier	</p>							
-						<form action="readblog.php" method="GET">
-							<input type="hidden" name="bl_id" value=1>
-							<button type="submit" class="hero-btn">MORE..</button>
-						</form>
-					<span class="name">Neha Shah . MAR 21, 2023</span>
-				</div>
-			</div>
-			<div class="col-div-6">
-				<?php
-
-				$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-				$sql = "SELECT * FROM blogs WHERE pos = 1";
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) {
-					while ($row = $result->fetch_assoc()) {
-						$name = $row['bl_name'];
-						$author = $row['author'];
-						$date = $row['date'];
-						$title = $row['title'];
-						$imageData = $row['blog_image1'];
-						// $_SESSION['id'] = $row['bl_id'];
-				
-						// Decode the Base64-encoded image data
-						$decodedImage = base64_decode($imageData);
-						$imgSrc = 'data:image/jpeg;base64,' . base64_encode($decodedImage);
-						// Display the image
-						echo '
-						<div class="lr-box">
-							<div class="col-div-6">
-								<h3 class="heading1">' . $name . '</h3>
-								<p class="blog-heading-1">' . $title . '</p>
-								<p class="text">Washing every few days is a hard habit to build up to, especially if you have oily hairs</p>
-								<form action="readblog.php" method="GET">
-									<input type="hidden" name="bl_id" value="' . $row['bl_id'] . '">
-									<button type="submit" class="hero-btn">MORE..</button>
-								</form>
-								<span class="name">' . $author . '. ' . $date . '</span>
-							</div>
-							<div class="col-div-6">
-							<img class="b-img-1" src="' . $imgSrc . '" alt="Image">
-							</div>
-							<div class="clearfix"></div>
-							<hr class="line">
-						</div>';
 
 
 
-					}
-				}
-				?>
 
-			</div>
-
-			<div class="clearfix"></div>
-		</div>
-	</section>
-
-	<br><br>
-
-
-	<section>
 		<div class="container" style="text-align:center;">
-			<h3>Latest stories</h3>
+			<br>
+			<br>
 			<br>
 			<?php
 
 			$conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
-			$sql = "SELECT * FROM blogs WHERE pos = 0";
+			$sql = "SELECT * FROM blogs ";
 			$result = $conn->query($sql);
 
 			if ($result->num_rows > 0) {
@@ -337,10 +270,8 @@
 				}
 			}
 			?>
-
-			<div class="clearfix"></div>
 		</div>
-	</section>
+
 	<section class="footer">
 		<hr style="margin-left: 10%; margin-right: 10%;">
 		<a href="aboutus.php">

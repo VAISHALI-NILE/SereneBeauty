@@ -27,6 +27,9 @@ if (isset($_GET['book_now'])) {
      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
  
   <style>
+    .header-services{
+      overflow: hidden;
+    }
     body {
       font-family: Arial, sans-serif;
       /* background-image: url(images/login-img.jpg); */
@@ -43,7 +46,7 @@ if (isset($_GET['book_now'])) {
       position: relative;
       margin: 0px;
       padding: 0px;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     h1 {
@@ -260,10 +263,21 @@ if (isset($_GET['book_now'])) {
         padding: 30px;
       }
     }
+    @media screen and (max-width: 767px) {
+      .booking-form{
+        padding: 47px;
+        margin: 15px;
+
+      }
+      body{
+        overflow: hidden;
+      }
+    }
+
   </style>
 </head>
 
-<body>
+<body style="overflow: hidden;">
   <section class="header-services">
     <nav>
       <a href="index2.php"><img src="images/logo-white.png" alt=""></a>

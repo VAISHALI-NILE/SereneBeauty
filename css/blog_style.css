@@ -190,3 +190,20 @@ footer p{
 	color: var(--white);
 	text-align: center;
 }
+@media (max-width: 768px) {
+	.text {
+		font-size: 8px;
+	}
+	.box-2 {
+		width: 30.5%;
+		float: left;
+		margin: 31px;
+		height: 30%;
+	}
+	.blog-heading-1 {
+		font-size: 18px;
+	}
+	.heading1{
+		font-size: 12px;
+	}
+}

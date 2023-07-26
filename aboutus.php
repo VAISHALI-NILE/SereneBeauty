@@ -61,7 +61,9 @@
     .nav-links ul{
         padding: 30px ;
     }
+
 }
+
 		</style>
 </head>
 <body class="aboutus">
@@ -117,16 +119,12 @@
 		<div class="content-container">
 			<p>Welcome to our beauty salon, where we believe in the power of beauty to boost your confidence and enhance your natural radiance. With a team of highly skilled professionals and a passion for creating exceptional experiences, we strive to provide top-notch services and pampering treatments that leave you feeling rejuvenated and beautiful.</p>
 			<p>Our salon offers a wide range of beauty services, including haircuts, styling, coloring, manicures, pedicures, facials, waxing, and more. We take pride in staying up-to-date with the latest trends and techniques in the beauty industry, ensuring that our clients receive the best possible care.</p>
-			<p>At Beauty Salon, we prioritize customer satisfaction above all else. Our friendly and knowledgeable staff is dedicated to understanding your unique needs and delivering personalized services tailored to you. We create a warm and welcoming atmosphere where you can relax and indulge in some well-deserved self-care.</p>
-			<p>With a focus on using high-quality products and maintaining the highest standards of hygiene and safety, you can trust us to provide exceptional services that exceed your expectations. We believe that everyone deserves to look and feel their best, and we are here to make that a reality for you.</p>
 			<p>Visit our salon today and experience the ultimate beauty journey. Let us take care of you and help you unleash your inner beauty.</p>
 		</div>
 		<div class="owner-details">
 			<h2>Meet Our Owner</h2><br>
 			<div class="owner-info">
-			  <div class="owner-image">
-				<img src="images/owner-img.jpg" alt="Owner's Image">
-			  </div>
+
 			  <div class="owner-text">
 				
 				<p><h4>Mrs. Vijaya wadgure</h4>Vijaya Wadgure, the proud owner of Serene Beauty, brings a wealth of experience and passion to the beauty industry. With 7 years of expertise in Makeup, she has established Serene Beauty as a premier destination for exceptional beauty services</p>

@@ -649,9 +649,12 @@ h3{
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    body{
+        overflow-x: hidden;
+    }
     .aboutus .container {
         padding: 10px;
-        width: 100%;
+        width: 85%;
     }
     
     .aboutus h1 {
@@ -660,6 +663,7 @@ h3{
     
     .aboutus .quote-overlay {
         font-size: 18px;
+        height: 92%;
     }
     
     .aboutus .owner-details {

@@ -1,7 +1,8 @@
 <?php
+// Update the path below to your autoload.php,
+// see https://getcomposer.org/doc/01-basic-usage.md
 require_once 'vendor/autoload.php';
 use Twilio\Rest\Client;
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get form input values
     $name = $_POST['name'];
@@ -9,24 +10,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $message = $_POST['message'];
     $phone = $_POST['phone'];
 
-    // Send the form message via SMS using Twilio
-    $sid = "AC6992369bb06913cf9d02db0b1d23369e";
-    $token = "eb6c299f121b93f5044a9dd5c879a03b";
-    $twilio = new Client($sid, $token);
+$sid    = "AC6992369bb06913cf9d02db0b1d23369e";
+$token  = "fa4728fbb7aafc31a1bf0474b6e38c1a";
+$twilio = new Client($sid, $token);
 
-    $twilioNumber = "+12298007219";  
-    $toNumber = "+919763633212";  
-
-    $twilio->messages->create(
-        $toNumber,
-        [
-            "from" => $twilioNumber,
-            "body" => "Name: $name\nEmail: $email\nPhone no.: $phone\nMessage: $message"
-        ]
-    );
+$message = $twilio->messages
+  ->create("+919763633212", // to
+    array(
+      "from" => "+12298007219",
+      "body" =>  "Name: $name\nEmail: $email\nPhone no.: $phone\nMessage: $message"// Enclose the message in quotes
+    )
+  );
 }
-
+print($message->sid);
 ?>
+
 
 <html>
 
@@ -281,7 +279,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                     <div class="text">
                         <h3>Email</h3>
-                        <p>abc@gmail.com</p>
+                        <p>vijaya987@gmail.com</p>
                     </div>
                 </div>
             </div>
