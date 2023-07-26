@@ -135,6 +135,7 @@ nav .fa {
     #service-table{
         width: 70%;
     }
+
 }
 
 .admin-panel {
@@ -208,11 +209,11 @@ form button {
 #blog-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  margin-top: 1px;
 }
 
 #blog-table th {
-  background-color: #23c483;
+  background-color: #e2dcd3;
   color: #fff;
   padding: 12px;
   font-weight: bold;
@@ -224,7 +225,7 @@ form button {
 }
 
 #blog-table td {
-  padding: 10px;
+  padding: 6px;
 }
 
 .delete-button,
@@ -240,11 +241,11 @@ form button {
 }
 
 .delete-button {
-  background-color: #c62323;
+  background-color: #c8baa8;
 }
 
 .preview-button {
-  background-color: #236dc6;
+  background-color: #7c6a67;
 }
 
 .delete-button:hover,
@@ -278,4 +279,8 @@ form button {
   .preview-button {
     font-size: 12px;
   }
+  th,td{
+    padding: -1px;
+    text-align: center;
+}
 }

@@ -8,6 +8,7 @@ if (isset($_GET['bl_id'])) {
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/site_icon.png" type="image/x-icon" />
     <title>Blog Reading Page</title>
     <link rel="stylesheet" href="css/readblog.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +36,7 @@ if (isset($_GET['bl_id'])) {
 <body>
     <section class="header-home">
         <nav>
-            <a href="index2.php"><img src="images/logo-black.png" alt=""></a>
+            <a href="index2.php"><img src="images/logo-white.png" alt=""></a>
             <div class="nav-links" id="navlinks">
                 <i class="fa fa-times" onclick="hideMenu()"></i>
                 <ul>

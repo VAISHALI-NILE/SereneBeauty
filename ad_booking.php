@@ -3,6 +3,7 @@
 
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="./images/site_icon.png" type="image/x-icon" />
   <title>Serene Beauty | ADMIN-Services </title>
   <link rel="stylesheet" href="css\a_booking.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
