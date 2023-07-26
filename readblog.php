@@ -21,12 +21,13 @@ if (isset($_GET['bl_id'])) {
 </head>
 <style>
         .header-home {
-            min-height: 30vh;
+            min-height: 55vh;
             width: 100%;
             background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/readblog-img.jpg);
             background-position: center;
             background-size: cover;
             position: relative;
+            overflow-x: hidden;
         }
     </style>
 </head>

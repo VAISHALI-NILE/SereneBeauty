@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Serene Beauty | About Us</title>
         <link rel="stylesheet" href="css/style2.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <script src="logic.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
 		<script>
@@ -24,6 +27,38 @@
 			});
 		}
 		</script>
+		<style>
+			@media(max-width: 700px){
+    .text-box h1{
+        font-size: 20px;
+    }
+    .nav-links ul li{
+        display: block;
+    }
+    .nav-links{
+        position: absolute;
+       
+        height: 100vh;
+        width: 200px;
+        background-color: rgba(180, 176, 166, 0.8);
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s;
+    }
+    nav .fa{
+        display: block;
+        color: black;
+        margin: 10px;
+        font-size: 22px;
+        cursor: pointer;
+    }
+    .nav-links ul{
+        padding: 30px ;
+    }
+}
+		</style>
 </head>
 <body class="aboutus">
 	<section class="header-aboutus">
@@ -130,5 +165,14 @@
 		
 		</section>
 	</div>
+	<script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 </html>

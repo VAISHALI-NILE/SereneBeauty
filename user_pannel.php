@@ -7,8 +7,18 @@ if (isset($_POST['logout'])) {
 ?>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <title>User Info Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/user_style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script>
   function toggleSection(sectionId) {
     var sections = document.getElementsByClassName("content-section");
@@ -32,6 +42,7 @@ if (isset($_POST['logout'])) {
     background-position: center;
     background-size: cover;
     position: relative; 
+    overflow-x: hidden;
 }
 nav{
     display: flex;
@@ -206,7 +217,7 @@ if (isset($_POST['submit']))
 }
 if (isset($_POST['logout2'])) {
     session_destroy(); // Destroy the session
-    header("Location: start.php"); // Redirect the user to the desired page after logout
+    header("Location: index.php"); // Redirect the user to the desired page after logout
     exit();
 }
 ?>
@@ -339,28 +350,57 @@ if ($i !== '3') {
 	  <br>
 	  <br>
 	  <div class="booking-list">
-		<div class="booking-item">
-			<h3>Haircut </h3><br>
+      <?php 
+      
+      $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
+    //  =============================== code for date ============
+
+    $sql = "SELECT * FROM bookings";
+    $result = $conn->query($sql);
+    if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+
+        $dt = $row['date'];
+        $currentDate = date('Y-m-d');
+        if ($currentDate > $dt)
+        {
+          $sql0 = "UPDATE bookings SET status = 1 WHERE date = '$dt'";
+          $conn->query($sql0);
+        }
+      }
+    }
+
+      $sql = "SELECT * FROM bookings WHERE c_id = $id AND status = 1";
+      $result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $s_id = $row['s_id'];
+        $date = $row['date'];
+        $time = $row['time'];
+		$bookingID = $row['b_id'];
+
+        $sql2 = "SELECT * FROM service WHERE s_id = $s_id";
+        $result2 = $conn->query($sql2);
+        $row2 = $result2->fetch_assoc();
+
+        $cost = $row2['cost'];
+        $name = $row2['name'];
+
+      echo '<div class="booking-item">
+			<h3>'.$name.' </h3><br>
 			<table>
 			  <tr>
-				  <td><b>June 5, 2023</b> 03:15 PM </td>
-				  <td id="money"> 190RS</td>
+				  <td><b>'. $date.'</b> '.$time .' </td>
+				  <td id="money"> '.$cost.'</td>
 			  </tr>
 			</table>
 
 		 Completed
-		</div>
-		<div class="booking-item">
-			<h3>Haircut </h3><br>
-			<table>
-			  <tr>
-				  <td><b>June 5, 2023</b> 03:15 PM </td>
-				  <td id="money"> 190RS</td>
-			  </tr>
-			</table>
+		</div>';
+    }
+  }
+    ?>
 
-		 Completed
-		</div>
 	  </div>
 	</section>
 <!-- ===================================upcoming bookings ======================================================= -->
@@ -376,19 +416,19 @@ $id = $_SESSION['id'];
 $conn = new mysqli("sql100.infinityfree.com", "if0_34678114", "943Uw88q1QdrSMC","if0_34678114_serenebeauty") or die("Connect failed: %s\n" . $conn->error);
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['booking_id'])) {
-    $bookingId = $_POST['booking_id'];
+// if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['booking_id'])) {
+//     $bookingId = $_POST['booking_id'];
 
-    // Delete the booking from the database
-    $deleteSql = "DELETE FROM bookings WHERE b_id ='$bookingId'";
+//     // Delete the booking from the database
+//     $deleteSql = "DELETE FROM bookings WHERE b_id ='$bookingId'";
 
-    if ($conn->query($deleteSql) === TRUE) {
-       // echo "Booking canceled successfully.",$bookingId;
-    } else {
-       // echo "Error canceling the booking: " . $conn->error;
-    }
-}
-$sql = "SELECT * FROM bookings WHERE c_id = $id";
+//     if ($conn->query($deleteSql) === TRUE) {
+//        // echo "Booking canceled successfully.",$bookingId;
+//     } else {
+//        // echo "Error canceling the booking: " . $conn->error;
+//     }
+// }
+$sql = "SELECT * FROM bookings WHERE c_id = $id AND status = 0";
 
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
@@ -453,6 +493,14 @@ if ($result->num_rows > 0) {
     <input type="submit" class="btn" name="logout" value="Log Out">
   </form>
 </section>
-
+<script>
+        var navlinks = document.getElementById("navlinks");
+        function showMenu() {
+            navlinks.style.right = "0";
+        }
+        function hideMenu() {
+            navlinks.style.right = "-200px";
+        }
+    </script>
 </body>
 </html>

@@ -2,15 +2,16 @@
 <html>
 
 <head>
-    <meta name="viewpoint" content="with=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Serene Beauty | Home </title>
-    <link rel="stylesheet" href="css\style2.css">
+    <link rel="stylesheet" href="css/style2.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
-    <script src="logic.js"></script>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         .header-home {
             min-height: 100vh;
@@ -19,6 +20,7 @@
             background-position: center;
             background-size: cover;
             position: relative;
+            overflow-x: hidden;
         }
     </style>
 </head>

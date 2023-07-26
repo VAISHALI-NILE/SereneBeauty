@@ -1,7 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  font-family: "Poppins", sans-serif;
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
 }
 
 nav {
@@ -89,10 +91,18 @@ nav .fa {
   display: none;
 }
 
-@media (max-width: 700px) {
-  .text-box h1 {
-    font-size: 20px;
-  }
+
+@media(max-width: 700px) {
+    .text-box h1 {
+        font-size: 20px;
+    }
+    .header-home{
+        width: 119%;
+    }
+    .nav-links ul li {
+        display: block;
+    }
+
 
   .nav-links ul li {
     display: block;
@@ -118,9 +128,13 @@ nav .fa {
     cursor: pointer;
   }
 
-  .nav-links ul {
-    padding: 30px;
-  }
+
+    .nav-links ul {
+        padding: 30px;
+    }
+    #service-table{
+        width: 70%;
+    }
 }
 
 .admin-panel {
