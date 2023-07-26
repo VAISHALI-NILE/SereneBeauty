@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <tr>
                 <th>Title</th>
                 <th>Content</th>
-                <th>Author</th>
+                <th>Author</th> 
                 <th>Date</th>
                 <th>Actions</th>
             </tr>

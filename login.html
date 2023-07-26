@@ -1,40 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" href="css/login_style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="icon" href="./images/site_icon.png" type="image/x-icon" />
+    <title>Serene Beauty | Login Page</title>
+  </head>
+  <body>
+    <section>
+      <div class="container">
+        <form action="login_veri.php" method="post">
+          <div class="form-container">
+            <div class="head">
+              <h2>Login</h2>
+            </div>
 
-<head>
-	<title>Serene Beauty | Login Page</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-	<link rel="stylesheet" href="css/login_style.css">
-	<style>
-		body {
-			min-height: 100vh;
-			width: 100%;
-			background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/login-img.jpg);
-			background-position: center;
-			background-size: cover;
-			position: relative;
-		}
-	</style>
-</head>
+            <div class="input-box">
+              <input type="text" name="username" required />
+              <label>Username</label>
+              <i class="fas fa-envelope"></i>
+            </div>
+            <span class="error" id="email-error" style="color: red"></span>
 
-<body>
-	<br>
-	<br>
-	<br>
-	<br>
-	<form action="login_veri.php" method="post">
-		<div style="text-align: center;">
-			<h1>Login</h1>
-		</div>
-		<label for="username">Username:</label>
-		<input type="text" id="username" name="username" required>
-		<label for="password">Password:</label>
-		<input type="password" id="password" name="password" required>
-		<input type="submit" value="Login">
-		<br><br>
-		<a href="signUp.html">Don't Have an Account? Sign Up!</a> 
-	</form>
+            <div class="input-box">
+              <input type="password" name="password" required />
+              <label>Password</label>
+              <i class="fas fa-lock toggle-password"></i>
+            </div>
 
-</body>
+            <div class="form-submit">
+              <button type="submit">Login</button>
+            </div>
+            <div class="already">
+              <p>
+                Don't Have an Account?
+                <a class="link" href="signUp.html">Sign Up!</a>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
 
+    <script>
+      const togglePassword = document.querySelector(".toggle-password");
+      const passwordInput = document.querySelector('input[name="password"]');
+
+      togglePassword.addEventListener("click", function () {
+        const type = passwordInput.getAttribute("type");
+        if (type === "password") {
+          passwordInput.setAttribute("type", "text");
+        } else {
+          passwordInput.setAttribute("type", "password");
+        }
+      });
+
+      const emailInput = document.querySelector('input[name="email"]');
+      const emailError = document.getElementById("email-error");
+
+      emailInput.addEventListener("input", function () {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(emailInput.value)) {
+          emailError.textContent = "Please enter a valid email address.";
+        } else {
+          emailError.textContent = "";
+        }
+      });
+    </script>
+  </body>
 </html>
