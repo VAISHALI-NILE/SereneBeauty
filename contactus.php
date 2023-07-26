@@ -11,19 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = $_POST['phone'];
 
 $sid    = "AC6992369bb06913cf9d02db0b1d23369e";
-$token  = "fa4728fbb7aafc31a1bf0474b6e38c1a";
+$token  = "f589bdf4cff7b2aa4210c51b87d5d061";
 $twilio = new Client($sid, $token);
 
 $message = $twilio->messages
   ->create("+919763633212", // to
     array(
       "from" => "+12298007219",
-      "body" =>  "Name: $name\nEmail: $email\nPhone no.: $phone\nMessage: $message"// Enclose the message in quotes
+      "body" => "Name: $name\nEmail: $email\nPhone no.: $phone\nMessage: $message" // Enclose the message in quotes
     )
   );
 }
 print($message->sid);
 ?>
+
 
 
 <html>
