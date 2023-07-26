@@ -28,6 +28,4 @@ if ($conn->query($sql) === TRUE)
 	header("Location: index2.php");
   echo "<br>New record created successfully";
 } 
-
-
 ?>
